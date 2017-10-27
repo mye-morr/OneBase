@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA+n5ZfsCWKkqQaYas/K02wgAAAAACAAAAAAAQZgAAAAEAACAAAADiCuCD/dj8umCTvCTn6Z153OIxdpHOD0Jo0NZhBQCeowAAAAAOgAAAAAIAACAAAAC+VTpTYNwJuxdASlWKGvMOyAJ/nDiW7IZVv0Tatz/r5iAAAAAk1h32DwUJVJWySccv2i3x45+NNTGgnHysULmKGRTmFEAAAACwMAqD35T0Oi0+SmMt3WDDZSGrU4hZ+rZ/O7VFq8zu2jXeqHzC/o9Tj9yjHB/dljXLMmdwoIB6xUj3852avkiC</EncryptedPassword>
+    <_PublishTargetUrl>ftp://50.62.168.157/httpdocs/OneBase</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/EPPlus.dll">
+      <publishTime>07/25/2017 16:52:15</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>07/25/2017 14:18:01</publishTime>
+    </File>
+    <File Include="bin/OneBase.dll">
+      <publishTime>10/26/2017 21:53:31</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>07/25/2017 14:18:00</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>07/25/2017 14:18:00</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>07/25/2017 14:18:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>07/25/2017 14:18:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>07/25/2017 14:18:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>07/25/2017 14:18:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>07/25/2017 14:18:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>07/25/2017 14:18:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>07/25/2017 14:18:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>07/25/2017 14:18:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>07/25/2017 14:18:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>07/25/2017 14:18:01</publishTime>
+    </File>
+    <File Include="Default.aspx">
+      <publishTime>08/17/2017 23:17:01</publishTime>
+    </File>
+    <File Include="Games.aspx">
+      <publishTime>10/26/2017 22:11:01</publishTime>
+    </File>
+    <File Include="gridviewScroll.css">
+      <publishTime>10/20/2015 21:53:26</publishTime>
+    </File>
+    <File Include="gridviewScroll.js">
+      <publishTime>01/23/2017 11:45:24</publishTime>
+    </File>
+    <File Include="gridviewScroll.min.js">
+      <publishTime>01/23/2017 11:45:24</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>08/30/2017 14:16:35</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>08/30/2017 14:17:59</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
