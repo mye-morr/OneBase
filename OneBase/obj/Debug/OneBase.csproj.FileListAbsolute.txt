@@ -3,6 +3,5 @@ C:\Users\michael\documents\visual studio 2015\Projects\OneBase\OneBase\bin\OneBa
 C:\Users\michael\documents\visual studio 2015\Projects\OneBase\OneBase\bin\OneBase.pdb
 C:\Users\michael\documents\visual studio 2015\Projects\OneBase\OneBase\bin\EPPlus.dll
 C:\Users\michael\documents\visual studio 2015\Projects\OneBase\OneBase\bin\EPPlus.xml
-C:\Users\michael\documents\visual studio 2015\Projects\OneBase\OneBase\obj\Debug\OneBase.csprojResolveAssemblyReference.cache
 C:\Users\michael\documents\visual studio 2015\Projects\OneBase\OneBase\obj\Debug\OneBase.dll
 C:\Users\michael\documents\visual studio 2015\Projects\OneBase\OneBase\obj\Debug\OneBase.pdb

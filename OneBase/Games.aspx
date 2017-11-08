@@ -272,63 +272,83 @@
                         </div>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="vcEngaged" SortExpression="engaged">
+                <asp:TemplateField HeaderText="vcTol" SortExpression="tol">
                     <EditItemTemplate>
-                        <asp:TextBox ID="txtVcEngaged" runat="server" Text='<%# Bind ("engaged") %>'></asp:TextBox>
+                        <asp:TextBox ID="txtVcTol" runat="server" Text='<%# Bind ("tol") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <div style="width:100px">
-                        <asp:Label ID="lblVcEngaged" runat="server" Text='<%# Eval("engaged") %>'></asp:Label>
+                        <asp:Label ID="lblVcTol" runat="server" Text='<%# Eval("tol") %>'></asp:Label>
                         </div>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="vcTransition" SortExpression="transition">
+                <asp:TemplateField HeaderText="vcFoc" SortExpression="foc">
                     <EditItemTemplate>
-                        <asp:TextBox ID="txtVcTransition" runat="server" Text='<%# Bind ("transition") %>'></asp:TextBox>
+                        <asp:TextBox ID="txtVcFoc" runat="server" Text='<%# Bind ("foc") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <div style="width:100px">
-                        <asp:Label ID="lblVcTransition" runat="server" Text='<%# Eval("transition") %>'></asp:Label>
+                        <asp:Label ID="lblVcFoc" runat="server" Text='<%# Eval("foc") %>'></asp:Label>
                         </div>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="vcMaint" SortExpression="maint">
+                <asp:TemplateField HeaderText="vcDet" SortExpression="det">
                     <EditItemTemplate>
-                        <asp:TextBox ID="txtVcMaint" runat="server" Text='<%# Bind ("maint") %>'></asp:TextBox>
+                        <asp:TextBox ID="txtVcDet" runat="server" Text='<%# Bind ("det") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <div style="width:100px">
-                        <asp:Label ID="lblVcMaint" runat="server" Text='<%# Eval("maint") %>'></asp:Label>
+                        <asp:Label ID="lblVcDet" runat="server" Text='<%# Eval("det") %>'></asp:Label>
                         </div>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="vcTask" SortExpression="task">
+                <asp:TemplateField HeaderText="vcWillp" SortExpression="willp">
                     <EditItemTemplate>
-                        <asp:TextBox ID="txtVcTask" runat="server" Text='<%# Bind ("task") %>'></asp:TextBox>
+                        <asp:TextBox ID="txtVcWillp" runat="server" Text='<%# Bind ("willp") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <div style="width:100px">
-                        <asp:Label ID="lblVcTask" runat="server" Text='<%# Eval("task") %>'></asp:Label>
+                        <asp:Label ID="lblVcWillp" runat="server" Text='<%# Eval("willp") %>'></asp:Label>
                         </div>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="vcPos" SortExpression="pos">
+                <asp:TemplateField HeaderText="vcImp_Neura" SortExpression="imp_neura">
                     <EditItemTemplate>
-                        <asp:TextBox ID="txtVcPos" runat="server" Text='<%# Bind ("pos") %>'></asp:TextBox>
+                        <asp:TextBox ID="txtVcImp_Neura" runat="server" Text='<%# Bind ("imp_neura") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <div style="width:100px">
-                        <asp:Label ID="lblVcPos" runat="server" Text='<%# Eval("pos") %>'></asp:Label>
+                        <asp:Label ID="lblVcImp_Neura" runat="server" Text='<%# Eval("imp_neura") %>'></asp:Label>
                         </div>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="vcNeg" SortExpression="neg">
+                <asp:TemplateField HeaderText="vcTread_Doub" SortExpression="tread_doub">
                     <EditItemTemplate>
-                        <asp:TextBox ID="txtVcNeg" runat="server" Text='<%# Bind ("neg") %>'></asp:TextBox>
+                        <asp:TextBox ID="txtVcTread_Doub" runat="server" Text='<%# Bind ("tread_doub") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <div style="width:100px">
-                        <asp:Label ID="lblVcNeg" runat="server" Text='<%# Eval("neg") %>'></asp:Label>
+                        <asp:Label ID="lblVcTread_Doub" runat="server" Text='<%# Eval("tread_doub") %>'></asp:Label>
+                        </div>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="vcDist_Trig" SortExpression="dist_trig">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtVcDist_Trig" runat="server" Text='<%# Bind ("dist_trig") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <div style="width:100px">
+                        <asp:Label ID="lblVcDist_Trig" runat="server" Text='<%# Eval("dist_trig") %>'></asp:Label>
+                        </div>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="vcExcu_A" SortExpression="excu_a">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtVcExcu_A" runat="server" Text='<%# Bind ("excu_a") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <div style="width:100px">
+                        <asp:Label ID="lblVcExcu_A" runat="server" Text='<%# Eval("excu_a") %>'></asp:Label>
                         </div>
                     </ItemTemplate>
                 </asp:TemplateField>

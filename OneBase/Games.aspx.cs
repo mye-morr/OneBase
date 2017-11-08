@@ -512,31 +512,92 @@ namespace TestPOSTWebService
 
             sSQL =
 
-                /*
-                "SELECT * FROM " +
-                "(SELECT DISTINCT(STUFF((SELECT '||' + vcComment FROM core_tbl_games_details dd WHERE dd.numRow = d.numRow ORDER BY datDetailsUpdate FOR XML PATH(''), TYPE, ROOT).value('root[1]', 'nvarchar(max)'), 1, 2, '')) as FollowUpComments," +
-                "(SELECT MAX(datDetailsUpdate) FROM core_tbl_games_details dd WHERE dd.numRow = d.numRow) as datUpdate," +
-                "d.* FROM core_tbl_games d LEFT OUTER JOIN core_tbl_games_details dd ON dd.numRow = d.numRow) as t"
-                */
+            /*
+            "SELECT * FROM " +
+            "(SELECT DISTINCT(STUFF((SELECT '||' + vcComment FROM core_tbl_games_details dd WHERE dd.numRow = d.numRow ORDER BY datDetailsUpdate FOR XML PATH(''), TYPE, ROOT).value('root[1]', 'nvarchar(max)'), 1, 2, '')) as FollowUpComments," +
+            "(SELECT MAX(datDetailsUpdate) FROM core_tbl_games_details dd WHERE dd.numRow = d.numRow) as datUpdate," +
+            "d.* FROM core_tbl_games d LEFT OUTER JOIN core_tbl_games_details dd ON dd.numRow = d.numRow) as t"
+            */
 
-                "SELECT substring([timestamp], 1, 10) as [datGame],"
-                + "SUM([00engaged]) as [engaged],"
-                + "SUM([00transition]) as [transition],"
-                + "SUM([00maint]) as [maint],"
-                + "SUM([00task]) as [task],"
-                + "SUM([00pos]) as [pos],"
-                + "SUM([00neg]) as [neg]"
-                + " FROM [core_tbl_games]"
-                + " PIVOT("
-                + "sum([pts])"
-                + " for [cat] in ("
-                + "[00engaged],"
-                + "[00transition],"
-                + "[00maint],"
-                + "[00task],"
-                + "[00pos],"
-                + "[00neg])) as [foo]"
-                + " GROUP BY substring([timestamp],1,10)";
+            /*
+            "SELECT substring([timestamp], 1, 10) as [datGame],"
+            + "SUM([00engaged]) as [engaged],"
+            + "SUM([00transition]) as [transition],"
+            + "SUM([00maint]) as [maint],"
+            + "SUM([00task]) as [task],"
+            + "SUM([00pos]) as [pos],"
+            + "SUM([00neg]) as [neg]"
+            + " FROM [core_tbl_games]"
+            + " PIVOT("
+            + "sum([pts])"
+            + " for [cat] in ("
+            + "[00engaged],"
+            + "[00transition],"
+            + "[00maint],"
+            + "[00task],"
+            + "[00pos],"
+            + "[00neg])) as [foo]"
+            + " GROUP BY substring([timestamp],1,10)";
+            */
+
+              "SELECT substring([timestamp], 1, 10) as [datGame],"
+            + "CAST("
+            + "100* CAST(SUM([00engaged]) as decimal(16,2))"
+            + "/COALESCE(corefree.iMinFree, 480)"
+            + " as int)"
+            + " as [tol],"
+            + "CAST("
+            + "100*"
+            + "(480.0/COALESCE(corefree.iMinFree, 480))"
+            + "*(CAST(SUM([00maint]) as decimal(16,2))"
+            + "/CAST(SUM([00transition]) as decimal(16,2)))"
+            + " as int)"
+            + " as [foc],"
+            + "CAST("
+            + "100*"
+            + "(480.0/COALESCE(corefree.iMinFree, 480))"
+            + "*(CAST(SUM([00task]) as decimal(16,2))"
+            + "/CAST(SUM([00maint]) as decimal(16,2)))"
+            + " as int)"
+            + " as [det],"
+            + "CAST("
+            + "100*"
+            + "CAST(COALESCE(SUM([00pos]), 0) as decimal(16, 2))"
+            + "/CAST(COALESCE(SUM([00pos]), 0) - COALESCE(SUM([00neg]),1) as decimal(16,2))"
+            + " as int)"
+            + " as [willp],"
+		    + "CAST("
+            + "CAST(ROUND(COUNT([00impul]) * (480.0 / COALESCE(corefree.iMinFree, 480)), 0) as int) as varchar(3)"
+			+ ")"
+	        + "+'/'+"
+            + "CAST("
+            + "CAST(ROUND(COUNT([00neura]) * (480.0 / COALESCE(corefree.iMinFree, 480)), 0) as int) as varchar(3)"
+			+ ")"
+            + " as [imp_neura],"
+		    + "CAST("
+            + "CAST(ROUND(COUNT([00tread]) * (480.0 / COALESCE(corefree.iMinFree, 480)), 0) as int) as varchar(3)"
+			+ ")"
+	        + "+'/'+"
+            + "CAST("
+            + "CAST(ROUND(COUNT([00doub]) * (480.0 / COALESCE(corefree.iMinFree, 480)), 0) as int) as varchar(3)"
+			+ ")"
+            + " as [tread_doub],"
+		    + "CAST("
+            + "CAST(ROUND(COUNT([00dist]) * (480.0 / COALESCE(corefree.iMinFree, 480)), 0) as int) as varchar(3)"
+			+ ")"
+	        + "+'/'+"
+            + "CAST("
+            + "CAST(ROUND(COUNT([00trig]) * (480.0 / COALESCE(corefree.iMinFree, 480)), 0) as int) as varchar(3)"
+			+ ")"
+            + " as [dist_trig],"
+            + "COUNT([00excu-a]) as [excu_a]"
+            + " FROM[core_tbl_games] core"
+            + " PIVOT("
+            +  "sum([pts]) for [cat] in ([00engaged],[00transition],[00maint],[00task],[00pos],[00neg],[00impul],[00neura],[00tread],[00doub],[00dist],[00trig],[00excu-a])"
+            + ") as [foo]"
+            + " LEFT JOIN[core_tbl_games_min_free] corefree"
+            + " ON substring([timestamp],1,10) = corefree.datMinFree"
+            + " GROUP BY substring([timestamp],1,10), corefree.iMinFree";
 
             if (sWhere.Length > 0)
             {
