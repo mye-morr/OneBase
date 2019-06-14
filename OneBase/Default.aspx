@@ -119,8 +119,7 @@
                     <table style="margin-left:10px; margin-right:5px">
                         <tr>
                             <td>
-                                <asp:TextBox ID="txtVcContactName" runat="server" Width="95px" PlaceHolder="Name" onkeydown = "return (event.keyCode!=13);" />
-                                <asp:Button ID="btnAppendFollowUp" runat="server" Text="Append <=" OnClick="btnAppendFollowUp_Click" /><br />
+                                <asp:TextBox ID="txtVcContactName" runat="server" Width="95px" PlaceHolder="Name" onkeydown = "return (event.keyCode!=13);" />                                <asp:Button ID="btnAppendFollowUp" runat="server" Text="Append <=" OnClick="btnAppendFollowUp_Click" /><br />
                         </tr>
                     </table>
                          --%>
