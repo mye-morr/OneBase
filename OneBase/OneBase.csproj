@@ -66,6 +66,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ColdToWarm.aspx" />
     <Content Include="Games.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="gridviewScroll.css" />
@@ -87,6 +88,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColdToWarm.aspx.cs">
+      <DependentUpon>ColdToWarm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ColdToWarm.aspx.designer.cs">
+      <DependentUpon>ColdToWarm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Clients.aspx.designer.cs">
       <DependentUpon>Clients.aspx</DependentUpon>
     </Compile>

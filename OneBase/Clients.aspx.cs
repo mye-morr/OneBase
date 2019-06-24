@@ -46,7 +46,7 @@ namespace OneBase
                 {
 
                     var excel = new ExcelPackage(File1.PostedFile.InputStream);
-                    var dt = excel.ToDataTable("core_tbl_nonsched");
+                    var dt = excel.ToDataTable("Clients");
                     var dtf = excel.ToFollowUpDataTable();
 
                     using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["CommentsConnectionString"].ConnectionString))
@@ -451,7 +451,7 @@ namespace OneBase
             }
             */
 
-            cmdText = "SELECT COUNT(numRow) cnt FROM dbo.core_tbl_nonsched i with (NOLOCK) WHERE (1=1)";
+            cmdText = "SELECT COUNT(numRow) cnt FROM [dbo].[Clients] i with (NOLOCK) WHERE (1=1)";
             string sWhere = "";
 
             if (txtCustomSQL.Text != "")
@@ -788,11 +788,12 @@ namespace OneBase
                     for (var col = 1; col <= totalCols; col++)   //printing header  //col = 1 to 2 changed to avoid numRow
                     {
                         ws.SetValue(1, col, dt.Columns[col - 1].ColumnName);  //col to col-1 changed to avoid numRow
-
+                        /*
                         ws.Column(2).Style.Numberformat.Format = "mm/dd/yyyy";    //dob
                         ws.Column(4).Style.Numberformat.Format = "mm/dd/yyyy";    //datcomment
                         ws.Column(5).Style.Numberformat.Format = "hh:mm:ss am/pm";  //time comment
                         // ws.Column(55).Style.Numberformat.Format = "@";  //worksheet
+                        */
                     }
 
                     for (var row = 0; row < rows.Count; row++) //printing rest of the rows

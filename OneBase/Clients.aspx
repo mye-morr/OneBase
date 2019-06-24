@@ -171,12 +171,12 @@
                                     <asp:Label ID="lblDatAdded" runat="server" Text='<%# Eval("datAdded") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="vcCampaign">
+                            <asp:TemplateField HeaderText="vcHow">
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtVcCampaign" runat="server" Text='<%# Bind ("vcCampaign") %>'></asp:TextBox>
+                                    <asp:TextBox ID="txtVcCampaign" runat="server" Text='<%# Bind ("vcHow") %>'></asp:TextBox>
                                 </EditItemTemplate>
                                 <ItemTemplate>
-                                    <asp:Label ID="lblVcCampaign" runat="server" Text='<%# Eval("vcCampaign") %>'></asp:Label>
+                                    <asp:Label ID="lblVcCampaign" runat="server" Text='<%# Eval("vcHow") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="vcComment">
@@ -195,12 +195,12 @@
                                     <asp:Label ID="lblVcMcdNo" runat="server" Text='<%# Eval("vcMcdNo") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="vcMltcStatus">
+                            <asp:TemplateField HeaderText="vcMltc">
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtVcMltcStatus" runat="server" Text='<%# Bind ("vcMltcStatus") %>'></asp:TextBox>
+                                    <asp:TextBox ID="txtVcMltc" runat="server" Text='<%# Bind ("vcMltc") %>'></asp:TextBox>
                                 </EditItemTemplate>
                                 <ItemTemplate>
-                                    <asp:Label ID="lblVcMltcStatus" runat="server" Text='<%# Eval("vcMltcStatus") %>'></asp:Label>
+                                    <asp:Label ID="lblVcMltc" runat="server" Text='<%# Eval("vcMltc") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="vcName">
@@ -211,20 +211,36 @@
                                     <asp:Label ID="lblVcName" runat="server" Text='<%# Eval("vcName") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="vcPhon">
+                            <asp:TemplateField HeaderText="vcP">
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtVcPhon" runat="server" Text='<%# Bind ("vcPhon") %>'></asp:TextBox>
+                                    <asp:TextBox ID="txtVcP" runat="server" Text='<%# Bind ("vcP") %>'></asp:TextBox>
                                 </EditItemTemplate>
                                 <ItemTemplate>
-                                    <asp:Label ID="lblVcPhon" runat="server" Text='<%# Eval("vcPhon") %>'></asp:Label>
+                                    <asp:Label ID="lblVcP" runat="server" Text='<%# Eval("vcP") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="vcPhonRelat">
+                            <asp:TemplateField HeaderText="vcPR">
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtVcPhonRelat" runat="server" Text='<%# Bind ("vcPhonRelat") %>'></asp:TextBox>
+                                    <asp:TextBox ID="txtVcPR" runat="server" Text='<%# Bind ("vcPR") %>'></asp:TextBox>
                                 </EditItemTemplate>
                                 <ItemTemplate>
-                                    <asp:Label ID="lblVcPhonRelat" runat="server" Text='<%# Eval("vcPhonRelat") %>'></asp:Label>
+                                    <asp:Label ID="lblVcPR" runat="server" Text='<%# Eval("vcPR") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="vcP2">
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txtVcP2" runat="server" Text='<%# Bind ("vcP2") %>'></asp:TextBox>
+                                </EditItemTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="lblVcP2" runat="server" Text='<%# Eval("vcP2") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="vcP2R">
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txtVcP2R" runat="server" Text='<%# Bind ("vcP2R") %>'></asp:TextBox>
+                                </EditItemTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="lblVcP2R" runat="server" Text='<%# Eval("vcP2R") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="vcLang">
@@ -293,7 +309,7 @@
         </div>        
         <br /><br />
         <asp:GridView ID="GridView1" runat="server" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" 
-            EnableModelValidation="True" ForeColor="#333333" ShowFooter="True" DataKeyNames="numRow"
+            EnableModelValidation="True" ForeColor="#333333" ShowFooter="True" DataKeyNames="numRow" 
             OnRowEditing="GridView1_RowEditing" OnRowCancelingEdit="GridView1_RowCancelling"
             OnRowDeleting="GridView1_RowDeleting" OnRowUpdating="GridView1_RowUpdating" OnSorting="GridView1_Sorting">
             <RowStyle Font-Size="15px"/>
@@ -330,12 +346,12 @@
                         <asp:Label ID="lblDatAdded" runat="server" Text='<%# Eval("datAdded") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="vcCampaign">
+                <asp:TemplateField HeaderText="vcHow">
                     <EditItemTemplate>
-                        <asp:TextBox ID="txtVcCampaign" runat="server" Text='<%# Bind ("vcCampaign") %>'></asp:TextBox>
+                        <asp:TextBox ID="txtVcHow" runat="server" Text='<%# Bind ("vcHow") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="lblVcCampaign" runat="server" Text='<%# Eval("vcCampaign") %>'></asp:Label>
+                        <asp:Label ID="lblVcHow" runat="server" Text='<%# Eval("vcHow") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="vcComment">
@@ -354,12 +370,12 @@
                         <asp:LinkButton ID="lblVcMcdNo" runat="server" Text='<%# Eval("vcMcdNo") %>' OnClick="btnPreview_Click"></asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="vcMltcStatus">
+                <asp:TemplateField HeaderText="vcMltc">
                     <EditItemTemplate>
-                        <asp:TextBox ID="txtVcMltcStatus" runat="server" Text='<%# Bind ("vcMltcStatus") %>'></asp:TextBox>
+                        <asp:TextBox ID="txtVcMltc" runat="server" Text='<%# Bind ("vcMltc") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="lblVcMltcStatus" runat="server" Text='<%# Eval("vcMltcStatus") %>'></asp:Label>
+                        <asp:Label ID="lblVcMltc" runat="server" Text='<%# Eval("vcMltc") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="vcName">
@@ -370,20 +386,20 @@
                         <asp:Label ID="lblVcName" runat="server" Text='<%# Eval("vcName") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="vcPhon">
+                <asp:TemplateField HeaderText="vcP">
                     <EditItemTemplate>
-                        <asp:TextBox ID="txtVcPhon" runat="server" Text='<%# Bind ("vcPhon") %>'></asp:TextBox>
+                        <asp:TextBox ID="txtVcP" runat="server" Text='<%# Bind ("vcP") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="lblVcPhon" runat="server" Text='<%# Eval("vcPhon") %>'></asp:Label>
+                        <asp:Label ID="lblVcP" runat="server" Text='<%# Eval("vcP") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="vcPhonRelat">
+                <asp:TemplateField HeaderText="vcPR">
                     <EditItemTemplate>
-                        <asp:TextBox ID="txtVcPhonRelat" runat="server" Text='<%# Bind ("vcPhonRelat") %>'></asp:TextBox>
+                        <asp:TextBox ID="txtVcPR" runat="server" Text='<%# Bind ("vcPR") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="lblVcPhonRelat" runat="server" Text='<%# Eval("vcPhonRelat") %>'></asp:Label>
+                        <asp:Label ID="lblVcPR" runat="server" Text='<%# Eval("vcPR") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="vcLang">
@@ -418,7 +434,6 @@
                         <asp:Label ID="lblDatDOB" runat="server" Text='<%# Eval("datDOB") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-
             </Columns>
             <EditRowStyle BackColor="#999999" />
             <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
