@@ -104,9 +104,27 @@
                             <EditItemTemplate>
                                 <tr>
                                     <td>
-                                        <asp:Label ID="Label3" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "vcComment").ToString() %>' />
+                                        <asp:Label ID="lblDatComment" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "datComment").ToString().Split()[0] %>' />,  
+                                        <asp:Label ID="lblVcCommentBy" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "vcCommentBy") %>' />
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        <asp:TextBox ID="txtVcWhatsNeeded" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "vcWhatsNeeded").ToString() %>' />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:TextBox ID="txtDatFollowUp" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "datFollowUp").ToString().Split()[0] %>' />
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom:2px solid grey">
+                                    <td>
+                                        <asp:LinkButton id="LinkButton1" runat="server" CommandName="Update" Text="Update" />
+                                        <asp:LinkButton id="LinkButton2" runat="server" Text="Cancel" CommandName="cancel" />
+                                    </td>
+                                </tr>
+
                                 <%--
                                 <tr>
                                 <asp:Label ID="Label9" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "datFuComment").ToString().Split()[0] %>' />,  

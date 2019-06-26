@@ -128,28 +128,16 @@ namespace OneBase
         {
             string numRow = DataList4.DataKeys[e.Item.ItemIndex].ToString();
 
-            TextBox txtVcCallRefNo = e.Item.FindControl("txtVcCallRefNo") as TextBox;
-            TextBox txtVcFuComment = e.Item.FindControl("txtVcFuComment") as TextBox;
-            TextBox txtVcContactName = e.Item.FindControl("txtVcContactName") as TextBox;
-            TextBox txtVcContactPhone = e.Item.FindControl("txtVcContactPhone") as TextBox;
-            TextBox txtVcContactEmail = e.Item.FindControl("txtVcContactEmail") as TextBox;
+            TextBox txtVcWhatsNeeded = e.Item.FindControl("txtVcWhatsNeeded") as TextBox;
             TextBox txtDatFollowUp = e.Item.FindControl("txtDatFollowUp") as TextBox;
 
             String UpdateQuery = string.Format(
-                "UPDATE FollowUp SET "
-                    + "vcCallRefNo={0},"
-                    + "vcFuComment={1},"
-                    + "vcContactName={2},"
-                    + "vcContactPhone={3},"
-                    + "vcContactEmail={4},"
-                    + "datFollowUp={5} "
-                + "WHERE numRow={6}",
-                    txtVcCallRefNo.Text.Equals("") ? "NULL" : "'" + txtVcCallRefNo.Text + "'",
-                    txtVcFuComment.Text.Equals("") ? "NULL" : "'" + txtVcFuComment.Text + "'",
-                    txtVcContactName.Text.Equals("") ? "NULL" : "'" + txtVcContactName.Text + "'",
-                    txtVcContactPhone.Text.Equals("") ? "NULL" : "'" + txtVcContactPhone.Text + "'",
-                    txtVcContactEmail.Text.Equals("") ? "NULL" : "'" + txtVcContactEmail.Text + "'",
-                    txtDatFollowUp.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatFollowUp.Text) + "'",
+                "UPDATE ClientsDetails SET "
+                    + "vcWhatsNeeded={0},"
+                    + "datFollowUp={1} "
+                + "WHERE numRowClients={2}",
+                    txtVcWhatsNeeded.Text.Equals("") ? "NULL" : "'" + txtVcWhatsNeeded.Text + "'",
+                    txtDatFollowUp.Text.Equals("") ? "NULL" : "'" + txtDatFollowUp.Text + "'",
                     Convert.ToInt32(numRow)
                 );
 
@@ -206,37 +194,55 @@ namespace OneBase
         {
             string numRow = GridView1.DataKeys[e.RowIndex].Value.ToString();
 
-            TextBox txtVcAcctNo = GridView2.Rows[e.RowIndex].FindControl("txtVcAcctNo") as TextBox;
-            TextBox txtVcClient = GridView2.Rows[e.RowIndex].FindControl("txtVcClient") as TextBox;
-            TextBox txtVcPatName = GridView2.Rows[e.RowIndex].FindControl("txtVcPatName") as TextBox;
-            TextBox txtVcPatSSN = GridView2.Rows[e.RowIndex].FindControl("txtVcPatSSN") as TextBox;
-            TextBox txtVcPatIns = GridView2.Rows[e.RowIndex].FindControl("txtVcPatIns") as TextBox;
-            TextBox txtVcPatInsIdNo = GridView2.Rows[e.RowIndex].FindControl("txtVcPatInsIdNo") as TextBox;
-            TextBox txtDecTotalChgs = GridView2.Rows[e.RowIndex].FindControl("txtDecTotalChgs") as TextBox;
-            TextBox txtDecExpected = GridView2.Rows[e.RowIndex].FindControl("txtDecExpected") as TextBox;
-            TextBox txtVcUpCategory = GridView2.Rows[e.RowIndex].FindControl("txtVcUpCategory") as TextBox;
+            TextBox txtDatAdded = GridView2.Rows[e.RowIndex].FindControl("txtDatAdded") as TextBox;
+            TextBox txtVcHow = GridView2.Rows[e.RowIndex].FindControl("txtVcHow") as TextBox;
+            TextBox txtVcComment = GridView2.Rows[e.RowIndex].FindControl("txtVcComment") as TextBox;
+            TextBox txtVcInsStatus = GridView2.Rows[e.RowIndex].FindControl("txtVcInsStatus") as TextBox;
+            TextBox txtVcMcdNo = GridView2.Rows[e.RowIndex].FindControl("txtVcMcdNo") as TextBox;
+            TextBox txtVcMltc = GridView2.Rows[e.RowIndex].FindControl("txtVcMltc") as TextBox;
+            TextBox txtVcName = GridView2.Rows[e.RowIndex].FindControl("txtVcName") as TextBox;
+            TextBox txtVcP = GridView2.Rows[e.RowIndex].FindControl("txtVcP") as TextBox;
+            TextBox txtVcPR = GridView2.Rows[e.RowIndex].FindControl("txtVcPR") as TextBox;
+            TextBox txtVcP2 = GridView2.Rows[e.RowIndex].FindControl("txtVcP2") as TextBox;
+            TextBox txtVcP2R = GridView2.Rows[e.RowIndex].FindControl("txtVcP2R") as TextBox;
+            TextBox txtVcLang = GridView2.Rows[e.RowIndex].FindControl("txtVcLang") as TextBox;
+            TextBox txtVcSSN = GridView2.Rows[e.RowIndex].FindControl("txtVcSSN") as TextBox;
+            TextBox txtVcSex = GridView2.Rows[e.RowIndex].FindControl("txtVcSex") as TextBox;
+            TextBox txtDatDOB = GridView2.Rows[e.RowIndex].FindControl("txtDatDOB") as TextBox;
 
             String UpdateQuery = string.Format(
-                "UPDATE Initial SET "
-                    + "vcAcctNo={0},"
-                    + "vcClient={1},"
-                    + "vcPatName={2},"
-                    + "vcPatSSN={3},"
-                    + "vcPatIns={4},"
-                    + "vcPatInsIdNo={5},"
-                    + "decTotalChgs={6},"
-                    + "decExpected={7},"
-                    + "vcUpCategory={8} "
-                + "WHERE numRow={9}",
-                    txtVcAcctNo.Text.Equals("") ? "NULL" : "'" + txtVcAcctNo.Text + "'",
-                    txtVcClient.Text.Equals("") ? "NULL" : "'" + txtVcClient.Text + "'",
-                    txtVcPatName.Text.Equals("") ? "NULL" : "'" + txtVcPatName.Text + "'",
-                    txtVcPatSSN.Text.Equals("") ? "NULL" : "'" + txtVcPatSSN.Text + "'",
-                    txtVcPatIns.Text.Equals("") ? "NULL" : "'" + txtVcPatIns.Text + "'",
-                    txtVcPatInsIdNo.Text.Equals("") ? "NULL" : "'" + txtVcPatInsIdNo.Text + "'",
-                    txtDecTotalChgs.Text.Equals("") ? "NULL" : "'" + txtDecTotalChgs.Text + "'",
-                    txtDecExpected.Text.Equals("") ? "NULL" : "'" + txtDecExpected.Text + "'",
-                    txtVcUpCategory.Text.Equals("") ? "NULL" : "'" + txtVcUpCategory.Text + "'",
+                "UPDATE Clients SET "
+                    + "datAdded={0},"
+                    + "vcHow={1},"
+                    + "vcComment={2},"
+                    + "vcInsStatus={3},"
+                    + "vcMcdNo={4},"
+                    + "vcMltc={5},"
+                    + "vcName={6},"
+                    + "vcP={7},"
+                    + "vcPR={8},"
+                    + "vcP2={9},"
+                    + "vcP2R={10},"
+                    + "vcLang={11},"
+                    + "vcSSN={12},"
+                    + "vcSex={13},"
+                    + "datDOB={14} "
+                + "WHERE numRow={15}",
+                    txtDatAdded.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatAdded.Text) + "'",
+                    txtVcHow.Text.Equals("") ? "NULL" : "'" + txtVcHow.Text + "'",
+                    txtVcComment.Text.Equals("") ? "NULL" : "'" + txtVcComment.Text + "'",
+                    txtVcInsStatus.Text.Equals("") ? "NULL" : "'" + txtVcInsStatus.Text + "'",
+                    txtVcMcdNo.Text.Equals("") ? "NULL" : "'" + txtVcMcdNo.Text + "'",
+                    txtVcMltc.Text.Equals("") ? "NULL" : "'" + txtVcMltc.Text + "'",
+                    txtVcName.Text.Equals("") ? "NULL" : "'" + txtVcName.Text + "'",
+                    txtVcP.Text.Equals("") ? "NULL" : "'" + txtVcP.Text + "'",
+                    txtVcPR.Text.Equals("") ? "NULL" : "'" + txtVcPR.Text + "'",
+                    txtVcP2.Text.Equals("") ? "NULL" : "'" + txtVcP2.Text + "'",
+                    txtVcP2R.Text.Equals("") ? "NULL" : "'" + txtVcP2R.Text + "'",
+                    txtVcLang.Text.Equals("") ? "NULL" : "'" + txtVcLang.Text + "'",
+                    txtVcSSN.Text.Equals("") ? "NULL" : "'" + txtVcSSN.Text + "'",
+                    txtVcSex.Text.Equals("") ? "NULL" : "'" + txtVcSex.Text + "'",
+                    txtDatDOB.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatDOB.Text) + "'",
                     Convert.ToInt32(numRow)
                 );
 
@@ -297,49 +303,100 @@ namespace OneBase
         {
             string numRow = GridView1.DataKeys[e.RowIndex].Value.ToString();
 
-            TextBox txtVcCommentBy = GridView1.Rows[e.RowIndex].FindControl("txtVcCommentBy") as TextBox;
+            TextBox txtDatAdded = GridView1.Rows[e.RowIndex].FindControl("txtDatAdded") as TextBox;
+            TextBox txtVcHow = GridView1.Rows[e.RowIndex].FindControl("txtVcHow") as TextBox;
             TextBox txtVcComment = GridView1.Rows[e.RowIndex].FindControl("txtVcComment") as TextBox;
-            TextBox txtVcAcctNo = GridView1.Rows[e.RowIndex].FindControl("txtVcAcctNo") as TextBox;
-            TextBox txtVcClient = GridView1.Rows[e.RowIndex].FindControl("txtVcClient") as TextBox;
-            TextBox txtVcPatName = GridView1.Rows[e.RowIndex].FindControl("txtVcPatName") as TextBox;
-            TextBox txtVcPatSSN = GridView1.Rows[e.RowIndex].FindControl("txtVcPatSSN") as TextBox;
-            TextBox txtVcPatIns = GridView1.Rows[e.RowIndex].FindControl("txtVcPatIns") as TextBox;
-            TextBox txtVcPatInsIdNo = GridView1.Rows[e.RowIndex].FindControl("txtVcPatInsIdNo") as TextBox;
-            TextBox txtDecTotalChgs = GridView1.Rows[e.RowIndex].FindControl("txtDecTotalChgs") as TextBox;
-            TextBox txtDecExpected = GridView1.Rows[e.RowIndex].FindControl("txtDecExpected") as TextBox;
-            TextBox txtVcUpCategory = GridView1.Rows[e.RowIndex].FindControl("txtVcUpCategory") as TextBox;
+            TextBox txtVcInsStatus = GridView1.Rows[e.RowIndex].FindControl("txtVcInsStatus") as TextBox;
+            TextBox txtVcMcdNo = GridView1.Rows[e.RowIndex].FindControl("txtVcMcdNo") as TextBox;
+            TextBox txtVcMltc = GridView1.Rows[e.RowIndex].FindControl("txtVcMltc") as TextBox;
+            TextBox txtVcName = GridView1.Rows[e.RowIndex].FindControl("txtVcName") as TextBox;
+            TextBox txtVcP = GridView1.Rows[e.RowIndex].FindControl("txtVcP") as TextBox;
+            TextBox txtVcPR = GridView1.Rows[e.RowIndex].FindControl("txtVcPR") as TextBox;
+            TextBox txtVcP2 = GridView1.Rows[e.RowIndex].FindControl("txtVcP2") as TextBox;
+            TextBox txtVcP2R = GridView1.Rows[e.RowIndex].FindControl("txtVcP2R") as TextBox;
+            TextBox txtVcLang = GridView1.Rows[e.RowIndex].FindControl("txtVcLang") as TextBox;
+            TextBox txtVcSSN = GridView1.Rows[e.RowIndex].FindControl("txtVcSSN") as TextBox;
+            TextBox txtVcSex = GridView1.Rows[e.RowIndex].FindControl("txtVcSex") as TextBox;
+            TextBox txtDatDOB = GridView1.Rows[e.RowIndex].FindControl("txtDatDOB") as TextBox;
+            TextBox txtVcMobil = GridView1.Rows[e.RowIndex].FindControl("txtVcMobil") as TextBox;
+            TextBox txtVcTransp = GridView1.Rows[e.RowIndex].FindControl("txtVcTransp") as TextBox;
+            TextBox txtVcAuthNo = GridView1.Rows[e.RowIndex].FindControl("txtVcAuthNo") as TextBox;
+            TextBox txtDatAuth = GridView1.Rows[e.RowIndex].FindControl("txtDatAuth") as TextBox;
+            TextBox txtDatEffectiv = GridView1.Rows[e.RowIndex].FindControl("txtDatEffectiv") as TextBox;
+            TextBox txtDatExp = GridView1.Rows[e.RowIndex].FindControl("txtDatExp") as TextBox;
+            TextBox txtBHHA_Sun = GridView1.Rows[e.RowIndex].FindControl("txtBHHA_Sun") as TextBox;
+            TextBox txtBHHA_Mon = GridView1.Rows[e.RowIndex].FindControl("txtBHHA_Mon") as TextBox;
+            TextBox txtBHHA_Tue = GridView1.Rows[e.RowIndex].FindControl("txtBHHA_Tue") as TextBox;
+            TextBox txtBHHA_Wed = GridView1.Rows[e.RowIndex].FindControl("txtBHHA_Wed") as TextBox;
+            TextBox txtBHHA_Thu = GridView1.Rows[e.RowIndex].FindControl("txtBHHA_Thu") as TextBox;
+            TextBox txtBHHA_Fri = GridView1.Rows[e.RowIndex].FindControl("txtBHHA_Fri") as TextBox;
+            TextBox txtBHHA_Sat = GridView1.Rows[e.RowIndex].FindControl("txtBHHA_Sat") as TextBox;
 
             String UpdateQuery = string.Format(
-                "UPDATE Initial SET "
-                    + "vcCommentBy='{0}',"
-                    + "vcComment='{1}',"
-                    + "vcAcctNo={2},"
-                    + "vcClient={3},"
-                    + "vcPatName={4},"
-                    + "vcPatSSN={5},"
-                    + "vcPatIns={6},"
-                    + "vcPatInsIdNo={7},"
-                    + "decTotalChgs={8},"
-                    + "decExpected={9},"
-                    + "vcUpCategory={10} "
-                + "WHERE numRow={11}",
-                    txtVcCommentBy.Text,
-                    txtVcComment.Text,
-                    txtVcAcctNo.Text.Equals("") ? "NULL" : "'" + txtVcAcctNo.Text + "'",
-                    txtVcClient.Text.Equals("") ? "NULL" : "'" + txtVcClient.Text + "'",
-                    txtVcPatName.Text.Equals("") ? "NULL" : "'" + txtVcPatName.Text + "'",
-                    txtVcPatSSN.Text.Equals("") ? "NULL" : "'" + txtVcPatSSN.Text + "'",
-                    txtVcPatIns.Text.Equals("") ? "NULL" : "'" + txtVcPatIns.Text + "'",
-                    txtVcPatInsIdNo.Text.Equals("") ? "NULL" : "'" + txtVcPatInsIdNo.Text + "'",
-                    txtDecTotalChgs.Text.Equals("") ? "NULL" : "'" + txtDecTotalChgs.Text + "'",
-                    txtDecExpected.Text.Equals("") ? "NULL" : "'" + txtDecExpected.Text + "'",
-                    txtVcUpCategory.Text.Equals("") ? "NULL" : "'" + txtVcUpCategory.Text + "'",
+                "UPDATE Clients SET "
+                    + "datAdded={0},"
+                    + "vcHow={1},"
+                    + "vcComment={2},"
+                    + "vcInsStatus={3},"
+                    + "vcMcdNo={4},"
+                    + "vcMltc={5},"
+                    + "vcName={6},"
+                    + "vcP={7},"
+                    + "vcPR={8},"
+                    + "vcP2={9},"
+                    + "vcP2R={10},"
+                    + "vcLang={11},"
+                    + "vcSSN={12},"
+                    + "vcSex={13},"
+                    + "datDOB={14},"
+                    + "vcMobil={15},"
+                    + "vcTransp={16},"
+                    + "vcAuthNo={17},"
+                    + "datAuth={18},"
+                    + "datEffectiv={19},"
+                    + "datExp={20},"
+                    + "bHHA_Sun={21},"
+                    + "bHHA_Mon={22},"
+                    + "bHHA_Tue={23},"
+                    + "bHHA_Wed={24},"
+                    + "bHHA_Thu={25},"
+                    + "bHHA_Fri={26},"
+                    + "bHHA_Sat={27} "
+                + "WHERE numRow={28}",
+                    txtDatAdded.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatAdded.Text) + "'",
+                    txtVcHow.Text.Equals("") ? "NULL" : "'" + txtVcHow.Text + "'",
+                    txtVcComment.Text.Equals("") ? "NULL" : "'" + txtVcComment.Text + "'",
+                    txtVcInsStatus.Text.Equals("") ? "NULL" : "'" + txtVcInsStatus.Text + "'",
+                    txtVcMcdNo.Text.Equals("") ? "NULL" : "'" + txtVcMcdNo.Text + "'",
+                    txtVcMltc.Text.Equals("") ? "NULL" : "'" + txtVcMltc.Text + "'",
+                    txtVcName.Text.Equals("") ? "NULL" : "'" + txtVcName.Text + "'",
+                    txtVcP.Text.Equals("") ? "NULL" : "'" + txtVcP.Text + "'",
+                    txtVcPR.Text.Equals("") ? "NULL" : "'" + txtVcPR.Text + "'",
+                    txtVcP2.Text.Equals("") ? "NULL" : "'" + txtVcP2.Text + "'",
+                    txtVcP2R.Text.Equals("") ? "NULL" : "'" + txtVcP2R.Text + "'",
+                    txtVcLang.Text.Equals("") ? "NULL" : "'" + txtVcLang.Text + "'",
+                    txtVcSSN.Text.Equals("") ? "NULL" : "'" + txtVcSSN.Text + "'",
+                    txtVcSex.Text.Equals("") ? "NULL" : "'" + txtVcSex.Text + "'",
+                    txtDatDOB.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatDOB.Text) + "'",
+                    txtVcMobil.Text.Equals("") ? "NULL" : "'" + txtVcMobil.Text + "'",
+                    txtVcTransp.Text.Equals("") ? "NULL" : "'" + txtVcTransp.Text + "'",
+                    txtVcAuthNo.Text.Equals("") ? "NULL" : "'" + txtVcAuthNo.Text + "'",
+                    txtDatAuth.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatAuth.Text) + "'",
+                    txtDatEffectiv.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatEffectiv.Text) + "'",
+                    txtDatExp.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatExp.Text) + "'",
+                    txtBHHA_Sun.Text.Equals("") ? "NULL" : "'" + txtBHHA_Sun.Text + "'",
+                    txtBHHA_Mon.Text.Equals("") ? "NULL" : "'" + txtBHHA_Mon.Text + "'",
+                    txtBHHA_Tue.Text.Equals("") ? "NULL" : "'" + txtBHHA_Tue.Text + "'",
+                    txtBHHA_Wed.Text.Equals("") ? "NULL" : "'" + txtBHHA_Wed.Text + "'",
+                    txtBHHA_Thu.Text.Equals("") ? "NULL" : "'" + txtBHHA_Thu.Text + "'",
+                    txtBHHA_Fri.Text.Equals("") ? "NULL" : "'" + txtBHHA_Fri.Text + "'",
+                    txtBHHA_Sat.Text.Equals("") ? "NULL" : "'" + txtBHHA_Sat.Text + "'",
                     Convert.ToInt32(numRow)
                 );
 
             GridView1.EditIndex = -1;
 
-            DataSet ds = GridDataTable(UpdateQuery, (int)Session["pageNumber"], 10);
+            DataSet ds = GridDataTable(UpdateQuery); //, (int)Session["pageNumber"], 10);
             Session["MainTable"] = ds.Tables[0];
 
             GridView1.DataSource = ds.Tables[0];
@@ -592,7 +649,9 @@ namespace OneBase
                     DataList4.DataSource = ds.Tables[3];
                     DataList4.DataBind();
 
+                    listboxInsStatus_Clients.ClearSelection();
                     txtVcWhatsNeeded.Text = "";
+                    txtVcMltc.Text = "";
                     txtDatFollowUp.Text = "";
                 }
             }
