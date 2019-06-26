@@ -10,7 +10,7 @@
 namespace OneBase {
     
     
-    public partial class WebForm1 {
+    public partial class WebForm2 {
         
         /// <summary>
         /// form1 control.
@@ -40,22 +40,22 @@ namespace OneBase {
         protected global::System.Web.UI.WebControls.DataList DataList4;
         
         /// <summary>
-        /// listboxInsStatus_Clients control.
+        /// listboxInsStatus_ColdToWarm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox listboxInsStatus_Clients;
+        protected global::System.Web.UI.WebControls.ListBox listboxInsStatus_ColdToWarm;
         
         /// <summary>
-        /// txtVcWhatsNeeded control.
+        /// txtVcNotes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtVcWhatsNeeded;
+        protected global::System.Web.UI.WebControls.TextBox txtVcNotes;
         
         /// <summary>
         /// txtVcMltc control.
@@ -67,6 +67,24 @@ namespace OneBase {
         protected global::System.Web.UI.WebControls.TextBox txtVcMltc;
         
         /// <summary>
+        /// txtDatFollowUp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDatFollowUp;
+        
+        /// <summary>
+        /// txtVcLevel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtVcLevel;
+        
+        /// <summary>
         /// btnAppendFollowUp control.
         /// </summary>
         /// <remarks>
@@ -76,13 +94,13 @@ namespace OneBase {
         protected global::System.Web.UI.WebControls.Button btnAppendFollowUp;
         
         /// <summary>
-        /// txtDatFollowUp control.
+        /// txtVcReason control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDatFollowUp;
+        protected global::System.Web.UI.WebControls.TextBox txtVcReason;
         
         /// <summary>
         /// txtNumRow control.

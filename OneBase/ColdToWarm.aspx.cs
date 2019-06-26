@@ -16,7 +16,7 @@ using System.Drawing;
 
 namespace OneBase
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class WebForm2 : System.Web.UI.Page
     {
         public static Boolean show = false;
         public static int pageIndex = 1;
@@ -44,13 +44,14 @@ namespace OneBase
                 String foo = this.Hidden1.Value;
                 if (foo.Length > 0)
                 {
+
                     var excel = new ExcelPackage(File1.PostedFile.InputStream);
-                    var dt = excel.ToDataTable("Clients");
-                    //var dtf = excel.ToFollowUpDataTable();
+                    var dt = excel.ToDataTable("ColdToWarm");
+                    var dtf = excel.ToFollowUpDataTable();
 
                     using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["CommentsConnectionString"].ConnectionString))
                     {
-                        using (SqlCommand cmd = new SqlCommand("Upsert_Clients"))
+                        using (SqlCommand cmd = new SqlCommand("Upsert_ColdToWarm"))
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Connection = conn;
@@ -96,7 +97,7 @@ namespace OneBase
         {
             DataList4.DataKeys[e.Item.ItemIndex].ToString();
             string numRowFu = DataList4.DataKeys[e.Item.ItemIndex].ToString();
-            string Query = "DELETE ClaimsDetails WHERE numRowDetails=" + numRowFu;
+            string Query = "DELETE ColdToWarmDetails WHERE numRowColdToWarm=" + numRowFu;
 
             DataSet ds = GridDataTable(Query);
 
@@ -173,7 +174,7 @@ namespace OneBase
         protected void GridView2_RowDeleting(Object sender, GridViewDeleteEventArgs e)
         {
             string numRow = GridView2.DataKeys[e.RowIndex].Value.ToString();
-            string Query = "DELETE Clients WHERE numRow=" + numRow;
+            string Query = "DELETE Claims WHERE numRow=" + numRow;
 
             DataSet ds = GridDataTable(Query);
             Session["MainTable"] = ds.Tables[0];
@@ -262,7 +263,7 @@ namespace OneBase
         protected void GridView1_RowDeleting(Object sender, GridViewDeleteEventArgs e)
         {
             string numRow = GridView1.DataKeys[e.RowIndex].Value.ToString();
-            string Query = "DELETE Claims WHERE numRow=" + numRow;
+            string Query = "DELETE ColdToWarm WHERE numRow=" + numRow;
 
             DataSet ds = GridDataTable(Query);
             Session["MainTable"] = ds.Tables[0];
@@ -450,7 +451,7 @@ namespace OneBase
             }
             */
 
-            cmdText = "SELECT COUNT(numRow) cnt FROM [dbo].[Clients] i with (NOLOCK) WHERE (1=1)";
+            cmdText = "SELECT COUNT(numRow) cnt FROM [dbo].[ColdToWarm] i with (NOLOCK) WHERE (1=1)";
             string sWhere = "";
 
             if (txtCustomSQL.Text != "")
@@ -514,9 +515,9 @@ namespace OneBase
             }
 
             sSQL = "SELECT * FROM "
-                + "(SELECT DISTINCT(STUFF((SELECT '||' + vcWhatsNeeded FROM ClientsDetails cd WHERE cd.numRowClients = c.numRow ORDER BY datComment FOR XML PATH(''), TYPE, ROOT).value('root[1]', 'nvarchar(max)'), 1, 2, '')) as FollowUpComments, "
-                + "(SELECT MAX(datComment) FROM ClientsDetails cd WHERE cd.numRow = c.numRow) as datUpdate, "
-                + "c.* FROM Clients c LEFT OUTER JOIN ClientsDetails cd ON cd.numRowClients = c.numRow) as t";
+                + "(SELECT DISTINCT(STUFF((SELECT '||' + vcNotes FROM ColdToWarmDetails cd WHERE cd.numRowColdToWarm = c.numRow ORDER BY datComment FOR XML PATH(''), TYPE, ROOT).value('root[1]', 'nvarchar(max)'), 1, 2, '')) as FollowUpComments, "
+                + "(SELECT MAX(datComment) FROM ColdToWarmDetails cd WHERE cd.numRow = c.numRow) as datUpdate, "
+                + "c.* FROM ColdToWarm c LEFT OUTER JOIN ColdToWarmDetails cd ON cd.numRowColdToWarm = c.numRow) as t";
 
             if (sWhere.Length > 0)
             {
@@ -537,7 +538,7 @@ namespace OneBase
 
             if (!txtSearch.Text.Equals(""))
             {
-                sSQL += "SELECT * FROM [dbo].[Clients] c WHERE c.[vcP]='" + txtSearch.Text + "';";
+                sSQL += "SELECT * FROM [dbo].[ColdToWarm] c WHERE c.[vcP]='" + txtSearch.Text + "';";
             }
 
             return sSQL;
@@ -549,7 +550,7 @@ namespace OneBase
 
             if (!txtSearch.Text.Equals(""))
             {
-                sSQL += "Select cd.* FROM Clients c INNER JOIN ClientsDetails cd ON cd.numRowClients = c.numRow WHERE c.[vcP]='" + txtSearch.Text + "';";
+                sSQL += "Select cd.* FROM ColdToWarm c INNER JOIN ColdToWarmDetails cd ON cd.numRowColdToWarm = c.numRow WHERE c.[vcP]='" + txtSearch.Text + "';";
             }
 
             return sSQL;
@@ -557,7 +558,6 @@ namespace OneBase
         /****************************
          ******** END QUERIES *******
          ****************************/
-
 
         /****************************
          *** BEGIN FUNCTIONALITY  ***
@@ -568,18 +568,19 @@ namespace OneBase
             if (!txtNumRow.Text.Equals(""))
             {
                 string[] formats = { "M/d/yyyy", "M/dd/yyyy", "MM/d/yyyy", "MM/dd/yyyy" };
+
                 DateTime dateValue;
                 if (DateTime.TryParseExact(txtDatFollowUp.Text, formats, new CultureInfo("en-US"), DateTimeStyles.None, out dateValue)
                     || txtDatFollowUp.Text.Equals(""))
                 {
                     String InsertQuery = string.Format(
-                       "INSERT INTO ClientsDetails (numRowClients,datComment,vcCommentBy,vcInsStatus,vcWhatsNeeded,vcMltcPlan,datFollowUp) VALUES ("
+                       "INSERT INTO ColdToWarmDetails (numRowColdToWarm,datComment,vcCommentBy,vcInsStatus,vcNotes,vcMLTC,datFollowUp) VALUES ("
                            + "{0},{1},{2},{3},{4},{5},{6})",
                             txtNumRow.Text.Equals("") ? "NULL" : txtNumRow.Text,
                             "'" + DateTime.Now.ToString("MM/dd/yyyy") + "'",
                             "'User'",
-                            "'" + listboxInsStatus_Clients.SelectedItem + "'",
-                            txtVcWhatsNeeded.Text.Equals("") ? "NULL" : "'" + txtVcWhatsNeeded.Text + "'",
+                            "'" + listboxInsStatus_ColdToWarm.SelectedItem + "'",
+                            txtVcNotes.Text.Equals("") ? "NULL" : "'" + txtVcNotes.Text + "'",
                             txtVcMltc.Text.Equals("") ? "NULL" : "'" + txtVcMltc.Text + "'",
                             txtDatFollowUp.Text.Equals("") ? "NULL" : "'" + dateValue.ToString().Split()[0] + "'"
                             );
@@ -592,8 +593,11 @@ namespace OneBase
                     DataList4.DataSource = ds.Tables[3];
                     DataList4.DataBind();
 
-                    txtVcWhatsNeeded.Text = "";
+                    listboxInsStatus_ColdToWarm.ClearSelection();                    
+                    txtVcNotes.Text = "";
+                    txtVcMltc.Text = "";
                     txtDatFollowUp.Text = "";
+
                 }
             }
         }
@@ -697,6 +701,7 @@ namespace OneBase
         {
             txtSearch.Text = "";
             txtCustomSQL.Text = "";
+            listboxInsStatus_ColdToWarm.ClearSelection();
 
             Session["MainTable"] = GridDataTable("").Tables[0];
             GridView1.DataSource = Session["MainTable"];
@@ -788,10 +793,7 @@ namespace OneBase
                     {
                         ws.SetValue(1, col - 1, dt.Columns[col - 1].ColumnName);  //col to col-1 changed to avoid numRow
                         ws.Column(3).Style.Numberformat.Format = "mm/dd/yyyy";    //datAdded
-                        ws.Column(17).Style.Numberformat.Format = "mm/dd/yyyy";    //datDOB
-                        ws.Column(21).Style.Numberformat.Format = "mm/dd/yyyy";    //datAuth
-                        ws.Column(22).Style.Numberformat.Format = "mm/dd/yyyy";    //datEffectiv
-                        ws.Column(23).Style.Numberformat.Format = "mm/dd/yyyy";    //datExp
+                        ws.Column(21).Style.Numberformat.Format = "mm/dd/yyyy";    //datNext
                     }
 
                     for (var row = 0; row < rows.Count; row++) //printing rest of the rows

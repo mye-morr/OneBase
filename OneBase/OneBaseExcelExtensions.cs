@@ -15,8 +15,8 @@ namespace OneBase
     {
         public static DataTable ToDataTable(this ExcelPackage package, String sTableName)
         {
-
             ExcelWorksheet workSheet = package.Workbook.Worksheets.First();
+
             DataTable table = new DataTable();
 
             Dictionary<string, bool> dictCols = new Dictionary<string, bool>();
@@ -31,9 +31,9 @@ namespace OneBase
                     String sCol = (string)row["COLUMN_NAME"];
 
                     if (!sCol.Equals("numRow")
-                        && !sCol.Equals("decVariance"))
+                        // && !sCol.Equals("decVariance")
+                        )
                     {
-
                         dictCols.Add(sCol, true);
 
                         var sExamine1 = sCol.Substring(0, 3);
@@ -41,7 +41,6 @@ namespace OneBase
                         if (sCol.Substring(0, 3).Equals("dec"))
                         {
                             table.Columns.Add(sCol, typeof(decimal));
-
                         }
                         else if (sCol.Substring(0, 3).Equals("dat"))
                         {
@@ -57,46 +56,33 @@ namespace OneBase
                 conn.Close();
             }
 
-            // Dictionary dictCols and Data Table table
-            // are now populated with schema representation
-
             // go through all rows
-            for (int rowNumber = 2; rowNumber <= workSheet.Dimension.End.Row; rowNumber++)
+            if (!workSheet.Cells[1, 5].Text.ToUpper().Contains("ADD COMMENT,"))         // *Added this to check if the file has followup commments if so then ignore this step
             {
-                var newRow = table.NewRow();
-
-                // add in missing columns to complete data-set
-                // sproc is expecting entire schema for upsert
-                for (int i = 0; i < dictCols.Count; i++)
+                for (int rowNumber = 2; rowNumber <= workSheet.Dimension.End.Row; rowNumber++)
                 {
-                    if (dictCols.Keys.ElementAt(i).Equals("datComment"))
-                    {
-                        newRow[i] = DateTime.Now.ToString("yyyy-MM-dd");
-                    }
-                    else if (dictCols.Keys.ElementAt(i).Equals("timComment"))
-                    {
-                        newRow[i] = DateTime.Now.ToString("HH:mm:ss");
-                    }
-                    else
+                    int d = workSheet.Dimension.End.Row;
+                    var newRow = table.NewRow();
+
+                    // add in missing columns to complete data-set
+                    // sproc is expecting entire schema for upsert
+                    for (int i = 0; i < dictCols.Count; i++)
                     {
                         newRow[i] = DBNull.Value;
 
-                        // !!! obvious room for optimization by creating a column mapping !!!
-                        // -> bc for each row, go through each dictionary entry, and each column !
                         // source columns could be in any order :-\
                         for (int j = 1; j <= workSheet.Dimension.End.Column; j++)
                         {
-                            if (dictCols.Keys.ElementAt(i)
-                                .Equals(workSheet.Cells[1, j].Value.ToString()))
+                            if (dictCols.Keys.ElementAt(i).Equals(workSheet.Cells[1, j].Value.ToString()))
                             {
-                                newRow[i] = workSheet.Cells[rowNumber, j].Text;
+                                newRow[i] = workSheet.Cells[rowNumber, j].Value;
                                 break;
                             }
                         }
                     }
-                }
 
-                table.Rows.Add(newRow);
+                    table.Rows.Add(newRow);
+                }
             }
             return table;
         }
