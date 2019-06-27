@@ -631,8 +631,10 @@ namespace OneBase
                 {
                     String InsertQuery = string.Format(
                        "INSERT INTO ClientsDetails (numRowClients,datComment,vcCommentBy,vcInsStatus,vcWhatsNeeded,vcMltcPlan,datFollowUp) VALUES ("
-                           + "{0},{1},{2},{3},{4},{5},{6})",
-                            txtNumRow.Text.Equals("") ? "NULL" : txtNumRow.Text,
+                           + "{0},{1},{2},{3},{4},{5},{6});"
+                           + "UPDATE Clients SET vcMltc={5} WHERE numRow='"
+                           + (txtNumRow.Text.Equals("") ? "NULL" : txtNumRow.Text) + "'",
+                        txtNumRow.Text.Equals("") ? "NULL" : txtNumRow.Text,
                             "'" + DateTime.Now.ToString("MM/dd/yyyy") + "'",
                             "'User'",
                             "'" + listboxInsStatus_Clients.SelectedItem + "'",
@@ -645,6 +647,9 @@ namespace OneBase
 
                     GridView1.DataSource = ds.Tables[0];
                     GridView1.DataBind();
+
+                    GridView2.DataSource = ds.Tables[2];
+                    GridView2.DataBind();
 
                     DataList4.DataSource = ds.Tables[3];
                     DataList4.DataBind();
@@ -748,7 +753,10 @@ namespace OneBase
                 DataList4.DataSource = ds.Tables[3];
                 DataList4.DataBind();
 
-                txtNumRow.Text = ds.Tables[2].Rows[0]["numRow"].ToString();
+                DataTable dtRecord = ds.Tables[2];
+                txtNumRow.Text = dtRecord.Rows[0]["numRow"].ToString();
+                listboxInsStatus_Clients.Text = dtRecord.Rows[0]["vcInsStatus"].ToString();
+                txtVcMltc.Text = dtRecord.Rows[0]["vcMltc"].ToString();
             }
         }
 
