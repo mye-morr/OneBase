@@ -96,7 +96,7 @@ namespace OneBase
         {
             DataList4.DataKeys[e.Item.ItemIndex].ToString();
             string numRowFu = DataList4.DataKeys[e.Item.ItemIndex].ToString();
-            string Query = "DELETE ClaimsDetails WHERE numRowDetails=" + numRowFu;
+            string Query = "DELETE ClientsDetails WHERE numRowDetails=" + numRowFu;
 
             DataSet ds = GridDataTable(Query);
 

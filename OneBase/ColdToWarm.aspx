@@ -67,7 +67,7 @@
                 <asp:TableCell Width="50%" HorizontalAlign="Right">
                     <div id="DataListFollowUpComments" style="height:300px;overflow:auto">
                     <asp:DataList ID="DataList4" runat="server" BackColor="White" BorderColor="#E7E7FF" BorderStyle="None" 
-                        BorderWidth="1px" CellPadding="3" DataKeyField="numRowColdToWarm" GridLines="Horizontal" RepeatDirection="Vertical"
+                        BorderWidth="1px" CellPadding="3" DataKeyField="numRow" GridLines="Horizontal" RepeatDirection="Vertical"
                         OnEditCommand="DataList4_EditCommand" OnCancelCommand="DataList4_CancelCommand" 
                         OnDeleteCommand="DataList4_DeleteCommand" OnUpdateCommand="DataList4_UpdateCommand" > <%-- OnItemDataBound=" --%>
                         <AlternatingItemStyle BackColor="#F7F7F7" />
