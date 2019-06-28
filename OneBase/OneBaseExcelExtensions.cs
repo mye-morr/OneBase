@@ -75,7 +75,16 @@ namespace OneBase
                         {
                             if (dictCols.Keys.ElementAt(i).Equals(workSheet.Cells[1, j].Value.ToString()))
                             {
-                                newRow[i] = workSheet.Cells[rowNumber, j].Value;
+                                try
+                                {
+                                    var varVal = workSheet.Cells[rowNumber, j].Value;
+                                    newRow[i] = workSheet.Cells[rowNumber, j].Value;
+                                }
+                                catch
+                                {
+                                    newRow[i] = DBNull.Value;
+                                };
+
                                 break;
                             }
                         }
