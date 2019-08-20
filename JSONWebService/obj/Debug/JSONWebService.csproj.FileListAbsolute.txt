@@ -1,0 +1,7 @@
+C:\Projects\OneBase\JSONWebService\bin\JSONWebService.dll.config
+C:\Projects\OneBase\JSONWebService\bin\JSONWebService.dll
+C:\Projects\OneBase\JSONWebService\bin\JSONWebService.pdb
+C:\Projects\OneBase\JSONWebService\obj\Debug\JSONWebService.csprojAssemblyReference.cache
+C:\Projects\OneBase\JSONWebService\obj\Debug\JSONWebService.csproj.CoreCompileInputs.cache
+C:\Projects\OneBase\JSONWebService\obj\Debug\JSONWebService.dll
+C:\Projects\OneBase\JSONWebService\obj\Debug\JSONWebService.pdb

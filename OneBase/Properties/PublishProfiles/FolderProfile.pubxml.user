@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\inetpub\wwwroot</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/EPPlus.dll">
+      <publishTime>02/03/2019 11:02:30</publishTime>
+    </File>
+    <File Include="bin/OneBase.dll">
+      <publishTime>08/11/2019 21:08:46</publishTime>
+    </File>
+    <File Include="bin/OneBase.pdb">
+      <publishTime>08/11/2019 21:08:46</publishTime>
+    </File>
+    <File Include="bloodhound.min.js">
+      <publishTime>08/11/2019 19:37:19</publishTime>
+    </File>
+    <File Include="Clients.aspx">
+      <publishTime>06/27/2019 09:51:45</publishTime>
+    </File>
+    <File Include="ColdToWarm.aspx">
+      <publishTime>06/27/2019 12:37:43</publishTime>
+    </File>
+    <File Include="Default.aspx">
+      <publishTime>06/14/2019 13:33:12</publishTime>
+    </File>
+    <File Include="Games.aspx">
+      <publishTime>06/14/2019 06:43:14</publishTime>
+    </File>
+    <File Include="gridviewScroll.css">
+      <publishTime>06/13/2019 23:07:22</publishTime>
+    </File>
+    <File Include="gridviewScroll.js">
+      <publishTime>06/13/2019 23:07:22</publishTime>
+    </File>
+    <File Include="gridviewScroll.min.js">
+      <publishTime>06/13/2019 23:07:22</publishTime>
+    </File>
+    <File Include="SignIn.html">
+      <publishTime>08/11/2019 20:43:12</publishTime>
+    </File>
+    <File Include="typeahead.jquery.min.js">
+      <publishTime>08/11/2019 19:37:19</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>08/11/2019 15:25:51</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

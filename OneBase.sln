@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 14 for Web
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneBase", "OneBase\OneBase.csproj", "{DA9C1710-8F34-4B7C-9FDE-764139306CD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSONWebService", "JSONWebService\JSONWebService.csproj", "{945F1F42-66D1-4A0C-9A85-1FED5407B7FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{DA9C1710-8F34-4B7C-9FDE-764139306CD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA9C1710-8F34-4B7C-9FDE-764139306CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA9C1710-8F34-4B7C-9FDE-764139306CD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{945F1F42-66D1-4A0C-9A85-1FED5407B7FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{945F1F42-66D1-4A0C-9A85-1FED5407B7FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{945F1F42-66D1-4A0C-9A85-1FED5407B7FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{945F1F42-66D1-4A0C-9A85-1FED5407B7FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {037BC748-93F3-4D17-A9AC-6CC38E9182BF}
 	EndGlobalSection
 EndGlobal
