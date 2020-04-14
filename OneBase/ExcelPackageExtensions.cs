@@ -19,7 +19,7 @@ namespace TestPOSTWebService
 
             Dictionary<string, bool> dictCols = new Dictionary<string, bool>();
 
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["CommentsConnectionString"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["OneBaseConnectionString"].ConnectionString))
             {
                 conn.Open();
 
@@ -104,7 +104,7 @@ namespace TestPOSTWebService
 
             Dictionary<string, bool> dictCols = new Dictionary<string, bool>();
 
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["CommentsConnectionString"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["OneBaseConnectionString"].ConnectionString))
             {
                 conn.Open();
 

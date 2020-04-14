@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="narfdaddy2" Class="OneBaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=184.168.194.77;Initial Catalog=narfdaddy2;Integrated Security=False;User ID=narfdaddy2;MultipleActiveResultSets=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="OneBaseConnectionString2" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Clients" Member="Clients">
+    <Type Name="Client">
+      <Column Name="numRow" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="datAdded" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="vcHow" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vcComment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="vcInsStatus" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vcMcdNo" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vcMltc" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vcName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vcP" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="vcPR" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vcP2" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="vcP2R" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="vcLang" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vcSSN" Type="System.String" DbType="Char(9)" CanBeNull="true" />
+      <Column Name="vcSex" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="datDOB" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="vcMobil" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="vcTransp" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="vcAuthNo" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="datAuth" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="datEffectiv" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="datExp" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="bHHA_Sun" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="bHHA_Mon" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="bHHA_Tue" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="bHHA_Wed" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="bHHA_Thu" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="bHHA_Fri" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="bHHA_Sat" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

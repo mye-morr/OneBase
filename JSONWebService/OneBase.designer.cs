@@ -22,7 +22,7 @@ namespace JSONWebService
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="OneBase")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="narfdaddy2")]
 	public partial class OneBaseDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -122,7 +122,7 @@ namespace JSONWebService
 		
 		private System.Nullable<System.DateTime> _datEffectiv;
 		
-		private System.Nullable<System.DateTime> _datExp;
+		private string _datExp;
 		
 		private string _bHHA_Sun;
 		
@@ -184,7 +184,7 @@ namespace JSONWebService
     partial void OndatAuthChanged();
     partial void OndatEffectivChanging(System.Nullable<System.DateTime> value);
     partial void OndatEffectivChanged();
-    partial void OndatExpChanging(System.Nullable<System.DateTime> value);
+    partial void OndatExpChanging(string value);
     partial void OndatExpChanged();
     partial void OnbHHA_SunChanging(string value);
     partial void OnbHHA_SunChanged();
@@ -467,7 +467,7 @@ namespace JSONWebService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vcSSN", DbType="Char(10)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_vcSSN", DbType="Char(9)")]
 		public string vcSSN
 		{
 			get
@@ -627,8 +627,8 @@ namespace JSONWebService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_datExp", DbType="Date")]
-		public System.Nullable<System.DateTime> datExp
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_datExp", DbType="VarChar(20)")]
+		public string datExp
 		{
 			get
 			{

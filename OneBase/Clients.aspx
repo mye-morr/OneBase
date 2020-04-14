@@ -338,6 +338,7 @@
                     </asp:GridView>
                 </asp:TableCell></asp:TableRow></asp:Table><br />&nbsp; <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox><asp:Button ID="btnPreview" runat="server" Text="View" OnClick="btnPreview_Click" />
             <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" />
+            <asp:Button ID="BtnDemo" runat="server" Text="Demo" OnClick="btnDemo_Click" />
             &nbsp;&nbsp;&nbsp; <input runat="server" id="Hidden1" type="hidden" />
             <input runat="server" id="File1" type="file" onchange="setHiddenValue()" style="display:none" />
             <input id="Button2" type="button" name="btn2" onclick="triggerFileUpload()" value="Up" />

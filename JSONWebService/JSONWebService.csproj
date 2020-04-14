@@ -68,6 +68,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OneBase.cs">
+      <DependentUpon>OneBase.dbml</DependentUpon>
+    </Compile>
     <Compile Include="wsClient.cs" />
     <Compile Include="OneBase.designer.cs">
       <AutoGen>True</AutoGen>
@@ -92,7 +95,8 @@
     <None Include="OneBase.dbml.layout">
       <DependentUpon>OneBase.dbml</DependentUpon>
     </None>
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <None Include="Properties\PublishProfiles\Website.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

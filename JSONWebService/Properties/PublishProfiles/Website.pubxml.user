@@ -6,23 +6,21 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\inetpub\wwwroot</_PublishTargetUrl>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA6M7BV3TLdUSYLFwyhvHFJQAAAAACAAAAAAAQZgAAAAEAACAAAAAiEJie6tGwK94qrcX/psJhR4jtgDNtHdvTebD7D9d/mgAAAAAOgAAAAAIAACAAAACSMsRELaUb85MXcnnZ9w0URT2MJ/3lDUeY0f5QF+PQ6SAAAADvid1k2ScTDJPimAySvahETNtzAkNJe74Id+9DMKoS+UAAAABp5xhRUwL/mnWBGEkaJQbAa0lxHd/Fb63DSBiitrcorREgFVb54vAAOGHVsDEDI5qglBVdvtCt+aGmUruLj0ki</EncryptedPassword>
+    <_PublishTargetUrl>ftp://50.62.168.157/httpdocs/OneBase</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/JSONWebService.dll">
-      <publishTime>08/11/2019 21:35:02</publishTime>
+      <publishTime>04/14/2020 06:18:42</publishTime>
     </File>
     <File Include="bin/JSONWebService.pdb">
-      <publishTime>08/11/2019 21:35:02</publishTime>
+      <publishTime>04/14/2020 06:18:42</publishTime>
     </File>
     <File Include="bloodhound.min.js">
       <publishTime>08/11/2019 21:09:59</publishTime>
     </File>
-    <File Include="Global.asax">
-      <publishTime>08/11/2019 21:00:09</publishTime>
-    </File>
     <File Include="OneBase.dbml">
-      <publishTime>08/11/2019 13:48:11</publishTime>
+      <publishTime>04/14/2020 06:12:55</publishTime>
     </File>
     <File Include="Service1.svc">
       <publishTime>08/11/2019 12:16:47</publishTime>
@@ -34,7 +32,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/11/2019 21:09:46</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/11/2019 19:50:31</publishTime>
+      <publishTime>04/14/2020 06:18:45</publishTime>
     </File>
   </ItemGroup>
 </Project>

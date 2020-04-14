@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,9 +14,9 @@ using OfficeOpenXml;
 using System.IO;
 using System.Drawing;
 
-namespace TestPOSTWebService
+namespace OneBase
 {
-    public partial class WebForm2 : System.Web.UI.Page
+    public partial class Events : System.Web.UI.Page
     {
         public static Boolean show = false;
         public static int pageIndex = 1;
@@ -44,14 +44,13 @@ namespace TestPOSTWebService
                 String foo = this.Hidden1.Value;
                 if (foo.Length > 0)
                 {
-
                     var excel = new ExcelPackage(File1.PostedFile.InputStream);
-                    var dt = excel.ToDataTable("core_tbl_nonsched");
-                    var dtf = excel.ToFollowUpDataTable();
+                    var dt = excel.ToDataTable("Clients");
+                    //var dtf = excel.ToFollowUpDataTable();
 
-                    using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["CommentsConnectionString"].ConnectionString))
+                    using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["OneBaseConnectionString"].ConnectionString))
                     {
-                        using (SqlCommand cmd = new SqlCommand("Upsert_core_tbl_nonsched"))
+                        using (SqlCommand cmd = new SqlCommand("Upsert_Clients"))
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Connection = conn;
@@ -97,7 +96,7 @@ namespace TestPOSTWebService
         {
             DataList4.DataKeys[e.Item.ItemIndex].ToString();
             string numRowFu = DataList4.DataKeys[e.Item.ItemIndex].ToString();
-            string Query = "DELETE ClaimsDetails WHERE numRowDetails=" + numRowFu;
+            string Query = "DELETE ClientsDetails WHERE numRowDetails=" + numRowFu;
 
             DataSet ds = GridDataTable(Query);
 
@@ -129,28 +128,16 @@ namespace TestPOSTWebService
         {
             string numRow = DataList4.DataKeys[e.Item.ItemIndex].ToString();
 
-            TextBox txtVcCallRefNo = e.Item.FindControl("txtVcCallRefNo") as TextBox;
-            TextBox txtVcFuComment = e.Item.FindControl("txtVcFuComment") as TextBox;
-            TextBox txtVcContactName = e.Item.FindControl("txtVcContactName") as TextBox;
-            TextBox txtVcContactPhone = e.Item.FindControl("txtVcContactPhone") as TextBox;
-            TextBox txtVcContactEmail = e.Item.FindControl("txtVcContactEmail") as TextBox;
+            TextBox txtVcWhatsNeeded = e.Item.FindControl("txtVcWhatsNeeded") as TextBox;
             TextBox txtDatFollowUp = e.Item.FindControl("txtDatFollowUp") as TextBox;
 
             String UpdateQuery = string.Format(
-                "UPDATE FollowUp SET "
-                    + "vcCallRefNo={0},"
-                    + "vcFuComment={1},"
-                    + "vcContactName={2},"
-                    + "vcContactPhone={3},"
-                    + "vcContactEmail={4},"
-                    + "datFollowUp={5} "
-                + "WHERE numRow={6}",
-                    txtVcCallRefNo.Text.Equals("") ? "NULL" : "'" + txtVcCallRefNo.Text + "'",
-                    txtVcFuComment.Text.Equals("") ? "NULL" : "'" + txtVcFuComment.Text + "'",
-                    txtVcContactName.Text.Equals("") ? "NULL" : "'" + txtVcContactName.Text + "'",
-                    txtVcContactPhone.Text.Equals("") ? "NULL" : "'" + txtVcContactPhone.Text + "'",
-                    txtVcContactEmail.Text.Equals("") ? "NULL" : "'" + txtVcContactEmail.Text + "'",
-                    txtDatFollowUp.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatFollowUp.Text) + "'",
+                "UPDATE ClientsDetails SET "
+                    + "vcWhatsNeeded={0},"
+                    + "datFollowUp={1} "
+                + "WHERE numRowClients={2}",
+                    txtVcWhatsNeeded.Text.Equals("") ? "NULL" : "'" + txtVcWhatsNeeded.Text + "'",
+                    txtDatFollowUp.Text.Equals("") ? "NULL" : "'" + txtDatFollowUp.Text + "'",
                     Convert.ToInt32(numRow)
                 );
 
@@ -174,7 +161,7 @@ namespace TestPOSTWebService
         protected void GridView2_RowDeleting(Object sender, GridViewDeleteEventArgs e)
         {
             string numRow = GridView2.DataKeys[e.RowIndex].Value.ToString();
-            string Query = "DELETE Claims WHERE numRow=" + numRow;
+            string Query = "DELETE Clients WHERE numRow=" + numRow;
 
             DataSet ds = GridDataTable(Query);
             Session["MainTable"] = ds.Tables[0];
@@ -207,37 +194,55 @@ namespace TestPOSTWebService
         {
             string numRow = GridView1.DataKeys[e.RowIndex].Value.ToString();
 
-            TextBox txtVcAcctNo = GridView2.Rows[e.RowIndex].FindControl("txtVcAcctNo") as TextBox;
-            TextBox txtVcClient = GridView2.Rows[e.RowIndex].FindControl("txtVcClient") as TextBox;
-            TextBox txtVcPatName = GridView2.Rows[e.RowIndex].FindControl("txtVcPatName") as TextBox;
-            TextBox txtVcPatSSN = GridView2.Rows[e.RowIndex].FindControl("txtVcPatSSN") as TextBox;
-            TextBox txtVcPatIns = GridView2.Rows[e.RowIndex].FindControl("txtVcPatIns") as TextBox;
-            TextBox txtVcPatInsIdNo = GridView2.Rows[e.RowIndex].FindControl("txtVcPatInsIdNo") as TextBox;
-            TextBox txtDecTotalChgs = GridView2.Rows[e.RowIndex].FindControl("txtDecTotalChgs") as TextBox;
-            TextBox txtDecExpected = GridView2.Rows[e.RowIndex].FindControl("txtDecExpected") as TextBox;
-            TextBox txtVcUpCategory = GridView2.Rows[e.RowIndex].FindControl("txtVcUpCategory") as TextBox;
+            TextBox txtDatAdded = GridView2.Rows[e.RowIndex].FindControl("txtDatAdded") as TextBox;
+            TextBox txtVcHow = GridView2.Rows[e.RowIndex].FindControl("txtVcHow") as TextBox;
+            TextBox txtVcComment = GridView2.Rows[e.RowIndex].FindControl("txtVcComment") as TextBox;
+            TextBox txtVcInsStatus = GridView2.Rows[e.RowIndex].FindControl("txtVcInsStatus") as TextBox;
+            TextBox txtVcMcdNo = GridView2.Rows[e.RowIndex].FindControl("txtVcMcdNo") as TextBox;
+            TextBox txtVcMltc = GridView2.Rows[e.RowIndex].FindControl("txtVcMltc") as TextBox;
+            TextBox txtVcName = GridView2.Rows[e.RowIndex].FindControl("txtVcName") as TextBox;
+            TextBox txtVcP = GridView2.Rows[e.RowIndex].FindControl("txtVcP") as TextBox;
+            TextBox txtVcPR = GridView2.Rows[e.RowIndex].FindControl("txtVcPR") as TextBox;
+            TextBox txtVcP2 = GridView2.Rows[e.RowIndex].FindControl("txtVcP2") as TextBox;
+            TextBox txtVcP2R = GridView2.Rows[e.RowIndex].FindControl("txtVcP2R") as TextBox;
+            TextBox txtVcLang = GridView2.Rows[e.RowIndex].FindControl("txtVcLang") as TextBox;
+            TextBox txtVcSSN = GridView2.Rows[e.RowIndex].FindControl("txtVcSSN") as TextBox;
+            TextBox txtVcSex = GridView2.Rows[e.RowIndex].FindControl("txtVcSex") as TextBox;
+            TextBox txtDatDOB = GridView2.Rows[e.RowIndex].FindControl("txtDatDOB") as TextBox;
 
             String UpdateQuery = string.Format(
-                "UPDATE Initial SET "
-                    + "vcAcctNo={0},"
-                    + "vcClient={1},"
-                    + "vcPatName={2},"
-                    + "vcPatSSN={3},"
-                    + "vcPatIns={4},"
-                    + "vcPatInsIdNo={5},"
-                    + "decTotalChgs={6},"
-                    + "decExpected={7},"
-                    + "vcUpCategory={8} "
-                + "WHERE numRow={9}",
-                    txtVcAcctNo.Text.Equals("") ? "NULL" : "'" + txtVcAcctNo.Text + "'",
-                    txtVcClient.Text.Equals("") ? "NULL" : "'" + txtVcClient.Text + "'",
-                    txtVcPatName.Text.Equals("") ? "NULL" : "'" + txtVcPatName.Text + "'",
-                    txtVcPatSSN.Text.Equals("") ? "NULL" : "'" + txtVcPatSSN.Text + "'",
-                    txtVcPatIns.Text.Equals("") ? "NULL" : "'" + txtVcPatIns.Text + "'",
-                    txtVcPatInsIdNo.Text.Equals("") ? "NULL" : "'" + txtVcPatInsIdNo.Text + "'",
-                    txtDecTotalChgs.Text.Equals("") ? "NULL" : "'" + txtDecTotalChgs.Text + "'",
-                    txtDecExpected.Text.Equals("") ? "NULL" : "'" + txtDecExpected.Text + "'",
-                    txtVcUpCategory.Text.Equals("") ? "NULL" : "'" + txtVcUpCategory.Text + "'",
+                "UPDATE Clients SET "
+                    + "datAdded={0},"
+                    + "vcHow={1},"
+                    + "vcComment={2},"
+                    + "vcInsStatus={3},"
+                    + "vcMcdNo={4},"
+                    + "vcMltc={5},"
+                    + "vcName={6},"
+                    + "vcP={7},"
+                    + "vcPR={8},"
+                    + "vcP2={9},"
+                    + "vcP2R={10},"
+                    + "vcLang={11},"
+                    + "vcSSN={12},"
+                    + "vcSex={13},"
+                    + "datDOB={14} "
+                + "WHERE numRow={15}",
+                    txtDatAdded.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatAdded.Text) + "'",
+                    txtVcHow.Text.Equals("") ? "NULL" : "'" + txtVcHow.Text + "'",
+                    txtVcComment.Text.Equals("") ? "NULL" : "'" + txtVcComment.Text + "'",
+                    txtVcInsStatus.Text.Equals("") ? "NULL" : "'" + txtVcInsStatus.Text + "'",
+                    txtVcMcdNo.Text.Equals("") ? "NULL" : "'" + txtVcMcdNo.Text + "'",
+                    txtVcMltc.Text.Equals("") ? "NULL" : "'" + txtVcMltc.Text + "'",
+                    txtVcName.Text.Equals("") ? "NULL" : "'" + txtVcName.Text + "'",
+                    txtVcP.Text.Equals("") ? "NULL" : "'" + txtVcP.Text + "'",
+                    txtVcPR.Text.Equals("") ? "NULL" : "'" + txtVcPR.Text + "'",
+                    txtVcP2.Text.Equals("") ? "NULL" : "'" + txtVcP2.Text + "'",
+                    txtVcP2R.Text.Equals("") ? "NULL" : "'" + txtVcP2R.Text + "'",
+                    txtVcLang.Text.Equals("") ? "NULL" : "'" + txtVcLang.Text + "'",
+                    txtVcSSN.Text.Equals("") ? "NULL" : "'" + txtVcSSN.Text + "'",
+                    txtVcSex.Text.Equals("") ? "NULL" : "'" + txtVcSex.Text + "'",
+                    txtDatDOB.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatDOB.Text) + "'",
                     Convert.ToInt32(numRow)
                 );
 
@@ -298,49 +303,100 @@ namespace TestPOSTWebService
         {
             string numRow = GridView1.DataKeys[e.RowIndex].Value.ToString();
 
-            TextBox txtVcCommentBy = GridView1.Rows[e.RowIndex].FindControl("txtVcCommentBy") as TextBox;
+            TextBox txtDatAdded = GridView1.Rows[e.RowIndex].FindControl("txtDatAdded") as TextBox;
+            TextBox txtVcHow = GridView1.Rows[e.RowIndex].FindControl("txtVcHow") as TextBox;
             TextBox txtVcComment = GridView1.Rows[e.RowIndex].FindControl("txtVcComment") as TextBox;
-            TextBox txtVcAcctNo = GridView1.Rows[e.RowIndex].FindControl("txtVcAcctNo") as TextBox;
-            TextBox txtVcClient = GridView1.Rows[e.RowIndex].FindControl("txtVcClient") as TextBox;
-            TextBox txtVcPatName = GridView1.Rows[e.RowIndex].FindControl("txtVcPatName") as TextBox;
-            TextBox txtVcPatSSN = GridView1.Rows[e.RowIndex].FindControl("txtVcPatSSN") as TextBox;
-            TextBox txtVcPatIns = GridView1.Rows[e.RowIndex].FindControl("txtVcPatIns") as TextBox;
-            TextBox txtVcPatInsIdNo = GridView1.Rows[e.RowIndex].FindControl("txtVcPatInsIdNo") as TextBox;
-            TextBox txtDecTotalChgs = GridView1.Rows[e.RowIndex].FindControl("txtDecTotalChgs") as TextBox;
-            TextBox txtDecExpected = GridView1.Rows[e.RowIndex].FindControl("txtDecExpected") as TextBox;
-            TextBox txtVcUpCategory = GridView1.Rows[e.RowIndex].FindControl("txtVcUpCategory") as TextBox;
+            TextBox txtVcInsStatus = GridView1.Rows[e.RowIndex].FindControl("txtVcInsStatus") as TextBox;
+            TextBox txtVcMcdNo = GridView1.Rows[e.RowIndex].FindControl("txtVcMcdNo") as TextBox;
+            TextBox txtVcMltc = GridView1.Rows[e.RowIndex].FindControl("txtVcMltc") as TextBox;
+            TextBox txtVcName = GridView1.Rows[e.RowIndex].FindControl("txtVcName") as TextBox;
+            TextBox txtVcP = GridView1.Rows[e.RowIndex].FindControl("txtVcP") as TextBox;
+            TextBox txtVcPR = GridView1.Rows[e.RowIndex].FindControl("txtVcPR") as TextBox;
+            TextBox txtVcP2 = GridView1.Rows[e.RowIndex].FindControl("txtVcP2") as TextBox;
+            TextBox txtVcP2R = GridView1.Rows[e.RowIndex].FindControl("txtVcP2R") as TextBox;
+            TextBox txtVcLang = GridView1.Rows[e.RowIndex].FindControl("txtVcLang") as TextBox;
+            TextBox txtVcSSN = GridView1.Rows[e.RowIndex].FindControl("txtVcSSN") as TextBox;
+            TextBox txtVcSex = GridView1.Rows[e.RowIndex].FindControl("txtVcSex") as TextBox;
+            TextBox txtDatDOB = GridView1.Rows[e.RowIndex].FindControl("txtDatDOB") as TextBox;
+            TextBox txtVcMobil = GridView1.Rows[e.RowIndex].FindControl("txtVcMobil") as TextBox;
+            TextBox txtVcTransp = GridView1.Rows[e.RowIndex].FindControl("txtVcTransp") as TextBox;
+            TextBox txtVcAuthNo = GridView1.Rows[e.RowIndex].FindControl("txtVcAuthNo") as TextBox;
+            TextBox txtDatAuth = GridView1.Rows[e.RowIndex].FindControl("txtDatAuth") as TextBox;
+            TextBox txtDatEffectiv = GridView1.Rows[e.RowIndex].FindControl("txtDatEffectiv") as TextBox;
+            TextBox txtDatExp = GridView1.Rows[e.RowIndex].FindControl("txtDatExp") as TextBox;
+            TextBox txtBHHA_Sun = GridView1.Rows[e.RowIndex].FindControl("txtBHHA_Sun") as TextBox;
+            TextBox txtBHHA_Mon = GridView1.Rows[e.RowIndex].FindControl("txtBHHA_Mon") as TextBox;
+            TextBox txtBHHA_Tue = GridView1.Rows[e.RowIndex].FindControl("txtBHHA_Tue") as TextBox;
+            TextBox txtBHHA_Wed = GridView1.Rows[e.RowIndex].FindControl("txtBHHA_Wed") as TextBox;
+            TextBox txtBHHA_Thu = GridView1.Rows[e.RowIndex].FindControl("txtBHHA_Thu") as TextBox;
+            TextBox txtBHHA_Fri = GridView1.Rows[e.RowIndex].FindControl("txtBHHA_Fri") as TextBox;
+            TextBox txtBHHA_Sat = GridView1.Rows[e.RowIndex].FindControl("txtBHHA_Sat") as TextBox;
 
             String UpdateQuery = string.Format(
-                "UPDATE Initial SET "
-                    + "vcCommentBy='{0}',"
-                    + "vcComment='{1}',"
-                    + "vcAcctNo={2},"
-                    + "vcClient={3},"
-                    + "vcPatName={4},"
-                    + "vcPatSSN={5},"
-                    + "vcPatIns={6},"
-                    + "vcPatInsIdNo={7},"
-                    + "decTotalChgs={8},"
-                    + "decExpected={9},"
-                    + "vcUpCategory={10} "
-                + "WHERE numRow={11}",
-                    txtVcCommentBy.Text,
-                    txtVcComment.Text,
-                    txtVcAcctNo.Text.Equals("") ? "NULL" : "'" + txtVcAcctNo.Text + "'",
-                    txtVcClient.Text.Equals("") ? "NULL" : "'" + txtVcClient.Text + "'",
-                    txtVcPatName.Text.Equals("") ? "NULL" : "'" + txtVcPatName.Text + "'",
-                    txtVcPatSSN.Text.Equals("") ? "NULL" : "'" + txtVcPatSSN.Text + "'",
-                    txtVcPatIns.Text.Equals("") ? "NULL" : "'" + txtVcPatIns.Text + "'",
-                    txtVcPatInsIdNo.Text.Equals("") ? "NULL" : "'" + txtVcPatInsIdNo.Text + "'",
-                    txtDecTotalChgs.Text.Equals("") ? "NULL" : "'" + txtDecTotalChgs.Text + "'",
-                    txtDecExpected.Text.Equals("") ? "NULL" : "'" + txtDecExpected.Text + "'",
-                    txtVcUpCategory.Text.Equals("") ? "NULL" : "'" + txtVcUpCategory.Text + "'",
+                "UPDATE Clients SET "
+                    + "datAdded={0},"
+                    + "vcHow={1},"
+                    + "vcComment={2},"
+                    + "vcInsStatus={3},"
+                    + "vcMcdNo={4},"
+                    + "vcMltc={5},"
+                    + "vcName={6},"
+                    + "vcP={7},"
+                    + "vcPR={8},"
+                    + "vcP2={9},"
+                    + "vcP2R={10},"
+                    + "vcLang={11},"
+                    + "vcSSN={12},"
+                    + "vcSex={13},"
+                    + "datDOB={14},"
+                    + "vcMobil={15},"
+                    + "vcTransp={16},"
+                    + "vcAuthNo={17},"
+                    + "datAuth={18},"
+                    + "datEffectiv={19},"
+                    + "datExp={20},"
+                    + "bHHA_Sun={21},"
+                    + "bHHA_Mon={22},"
+                    + "bHHA_Tue={23},"
+                    + "bHHA_Wed={24},"
+                    + "bHHA_Thu={25},"
+                    + "bHHA_Fri={26},"
+                    + "bHHA_Sat={27} "
+                + "WHERE numRow={28}",
+                    txtDatAdded.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatAdded.Text) + "'",
+                    txtVcHow.Text.Equals("") ? "NULL" : "'" + txtVcHow.Text + "'",
+                    txtVcComment.Text.Equals("") ? "NULL" : "'" + txtVcComment.Text + "'",
+                    txtVcInsStatus.Text.Equals("") ? "NULL" : "'" + txtVcInsStatus.Text + "'",
+                    txtVcMcdNo.Text.Equals("") ? "NULL" : "'" + txtVcMcdNo.Text + "'",
+                    txtVcMltc.Text.Equals("") ? "NULL" : "'" + txtVcMltc.Text + "'",
+                    txtVcName.Text.Equals("") ? "NULL" : "'" + txtVcName.Text + "'",
+                    txtVcP.Text.Equals("") ? "NULL" : "'" + txtVcP.Text + "'",
+                    txtVcPR.Text.Equals("") ? "NULL" : "'" + txtVcPR.Text + "'",
+                    txtVcP2.Text.Equals("") ? "NULL" : "'" + txtVcP2.Text + "'",
+                    txtVcP2R.Text.Equals("") ? "NULL" : "'" + txtVcP2R.Text + "'",
+                    txtVcLang.Text.Equals("") ? "NULL" : "'" + txtVcLang.Text + "'",
+                    txtVcSSN.Text.Equals("") ? "NULL" : "'" + txtVcSSN.Text + "'",
+                    txtVcSex.Text.Equals("") ? "NULL" : "'" + txtVcSex.Text + "'",
+                    txtDatDOB.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatDOB.Text) + "'",
+                    txtVcMobil.Text.Equals("") ? "NULL" : "'" + txtVcMobil.Text + "'",
+                    txtVcTransp.Text.Equals("") ? "NULL" : "'" + txtVcTransp.Text + "'",
+                    txtVcAuthNo.Text.Equals("") ? "NULL" : "'" + txtVcAuthNo.Text + "'",
+                    txtDatAuth.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatAuth.Text) + "'",
+                    txtDatEffectiv.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatEffectiv.Text) + "'",
+                    txtDatExp.Text.Equals("") ? "NULL" : "'" + Convert.ToDateTime(txtDatExp.Text) + "'",
+                    txtBHHA_Sun.Text.Equals("") ? "NULL" : "'" + txtBHHA_Sun.Text + "'",
+                    txtBHHA_Mon.Text.Equals("") ? "NULL" : "'" + txtBHHA_Mon.Text + "'",
+                    txtBHHA_Tue.Text.Equals("") ? "NULL" : "'" + txtBHHA_Tue.Text + "'",
+                    txtBHHA_Wed.Text.Equals("") ? "NULL" : "'" + txtBHHA_Wed.Text + "'",
+                    txtBHHA_Thu.Text.Equals("") ? "NULL" : "'" + txtBHHA_Thu.Text + "'",
+                    txtBHHA_Fri.Text.Equals("") ? "NULL" : "'" + txtBHHA_Fri.Text + "'",
+                    txtBHHA_Sat.Text.Equals("") ? "NULL" : "'" + txtBHHA_Sat.Text + "'",
                     Convert.ToInt32(numRow)
                 );
 
             GridView1.EditIndex = -1;
 
-            DataSet ds = GridDataTable(UpdateQuery, (int)Session["pageNumber"], 10);
+            DataSet ds = GridDataTable(UpdateQuery); //, (int)Session["pageNumber"], 10);
             Session["MainTable"] = ds.Tables[0];
 
             GridView1.DataSource = ds.Tables[0];
@@ -406,7 +462,7 @@ namespace TestPOSTWebService
          ****************************/
         private DataSet GridDataTable(string Query = "", int pageIndex1 = 0, int pageSize1 = 0)
         {
-            string connectionstring = ConfigurationManager.ConnectionStrings["CommentsConnectionString"].ConnectionString;
+            string connectionstring = ConfigurationManager.ConnectionStrings["OneBaseConnectionString"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionstring))
             {
                 conn.Open();
@@ -451,13 +507,14 @@ namespace TestPOSTWebService
             }
             */
 
-            cmdText = "SELECT COUNT(numRow) cnt FROM [dbo].[core_tbl_games] i with (NOLOCK) WHERE (1=1)";
+            cmdText = "SELECT COUNT(numRow) cnt FROM [dbo].[Clients] i with (NOLOCK) WHERE (1=1)";
+            string sWhere = "";
 
             if (txtCustomSQL.Text != "")
             {
                 string sSqlTail = txtCustomSQL.Text;
-                string sWhere = "";
-                if (sSqlTail.ToUpper().IndexOf("ORDER BY") > -1) {
+                if (sSqlTail.ToUpper().IndexOf("ORDER BY") > -1)
+                {
                     if (sSqlTail.ToUpper().StartsWith("ORDER BY"))
                     {
                         // do nothing for ORDER BY
@@ -465,12 +522,15 @@ namespace TestPOSTWebService
                     else
                     {
                         sWhere = sSqlTail.Substring(0, sSqlTail.ToUpper().IndexOf("ORDER BY") - 1);
-                        cmdText = cmdText + " AND " + sWhere;
+                        cmdText = cmdText + " WHERE (1=1) AND " + sWhere;
                     }
                 }
                 else
                 {
-                    cmdText = cmdText + " AND " + sWhere;
+                    if (sWhere.Length > 0)
+                    {
+                        cmdText = cmdText + " AND " + sWhere;
+                    }
                 }
             }
 
@@ -488,9 +548,9 @@ namespace TestPOSTWebService
 
             if (!sSQLTail.Equals(""))
             {
-                if(!sSQLTail.ToUpper().Contains("DELETE"))
+                if (!sSQLTail.ToUpper().Contains("DELETE"))
                 {
-                    if(sSQLTail.ToUpper().StartsWith("ORDER BY"))
+                    if (sSQLTail.ToUpper().StartsWith("ORDER BY"))
                     {
                         sOrderBy = sSQLTail;
                     }
@@ -510,98 +570,14 @@ namespace TestPOSTWebService
                 }
             }
 
-            sSQL =
-
-            /*
-            "SELECT * FROM " +
-            "(SELECT DISTINCT(STUFF((SELECT '||' + vcComment FROM core_tbl_games_details dd WHERE dd.numRow = d.numRow ORDER BY datDetailsUpdate FOR XML PATH(''), TYPE, ROOT).value('root[1]', 'nvarchar(max)'), 1, 2, '')) as FollowUpComments," +
-            "(SELECT MAX(datDetailsUpdate) FROM core_tbl_games_details dd WHERE dd.numRow = d.numRow) as datUpdate," +
-            "d.* FROM core_tbl_games d LEFT OUTER JOIN core_tbl_games_details dd ON dd.numRow = d.numRow) as t"
-            */
-
-            /*
-            "SELECT substring([timestamp], 1, 10) as [datGame],"
-            + "SUM([00engaged]) as [engaged],"
-            + "SUM([00transition]) as [transition],"
-            + "SUM([00maint]) as [maint],"
-            + "SUM([00task]) as [task],"
-            + "SUM([00pos]) as [pos],"
-            + "SUM([00neg]) as [neg]"
-            + " FROM [core_tbl_games]"
-            + " PIVOT("
-            + "sum([pts])"
-            + " for [cat] in ("
-            + "[00engaged],"
-            + "[00transition],"
-            + "[00maint],"
-            + "[00task],"
-            + "[00pos],"
-            + "[00neg])) as [foo]"
-            + " GROUP BY substring([timestamp],1,10)";
-            */
-
-              "SELECT substring([timestamp], 1, 10) as [datGame],"
-            + "CAST("
-            + "100* CAST(SUM([00engaged]) as decimal(16,2))"
-            + "/COALESCE(corefree.iMinFree, 480)"
-            + " as int)"
-            + " as [tol],"
-            + "CAST("
-            + "100*"
-            + "(480.0/COALESCE(corefree.iMinFree, 480))"
-            + "*(CAST(SUM([00maint]) as decimal(16,2))"
-            + "/CAST(SUM([00transition]) as decimal(16,2)))"
-            + " as int)"
-            + " as [foc],"
-            + "CAST("
-            + "100*"
-            + "(480.0/COALESCE(corefree.iMinFree, 480))"
-            + "*(CAST(SUM([00task]) as decimal(16,2))"
-            + "/CAST(SUM([00maint]) as decimal(16,2)))"
-            + " as int)"
-            + " as [det],"
-            + "CAST("
-            + "100*"
-            + "CAST(COALESCE(SUM([00pos]), 0) as decimal(16, 2))"
-            + "/CAST(COALESCE(SUM([00pos]), 0) - COALESCE(SUM([00neg]),1) as decimal(16,2))"
-            + " as int)"
-            + " as [willp],"
-		    + "CAST("
-            + "CAST(ROUND(COUNT([00impul]) * (480.0 / COALESCE(corefree.iMinFree, 480)), 0) as int) as varchar(3)"
-			+ ")"
-	        + "+'/'+"
-            + "CAST("
-            + "CAST(ROUND(COUNT([00neura]) * (480.0 / COALESCE(corefree.iMinFree, 480)), 0) as int) as varchar(3)"
-			+ ")"
-            + " as [imp_neura],"
-		    + "CAST("
-            + "CAST(ROUND(COUNT([00tread]) * (480.0 / COALESCE(corefree.iMinFree, 480)), 0) as int) as varchar(3)"
-			+ ")"
-	        + "+'/'+"
-            + "CAST("
-            + "CAST(ROUND(COUNT([00doub]) * (480.0 / COALESCE(corefree.iMinFree, 480)), 0) as int) as varchar(3)"
-			+ ")"
-            + " as [tread_doub],"
-		    + "CAST("
-            + "CAST(ROUND(COUNT([00dist]) * (480.0 / COALESCE(corefree.iMinFree, 480)), 0) as int) as varchar(3)"
-			+ ")"
-	        + "+'/'+"
-            + "CAST("
-            + "CAST(ROUND(COUNT([00trig]) * (480.0 / COALESCE(corefree.iMinFree, 480)), 0) as int) as varchar(3)"
-			+ ")"
-            + " as [dist_trig],"
-            + "COUNT([00excu-a]) as [excu_a]"
-            + " FROM[core_tbl_games] core"
-            + " PIVOT("
-            +  "sum([pts]) for [cat] in ([00engaged],[00transition],[00maint],[00task],[00pos],[00neg],[00impul],[00neura],[00tread],[00doub],[00dist],[00trig],[00excu-a])"
-            + ") as [foo]"
-            + " LEFT JOIN[core_tbl_games_min_free] corefree"
-            + " ON substring([timestamp],1,10) = corefree.datMinFree"
-            + " GROUP BY substring([timestamp],1,10), corefree.iMinFree";
+            sSQL = "SELECT * FROM "
+                + "(SELECT DISTINCT(STUFF((SELECT '||' + vcComment FROM core_tbl_events_details cd WHERE cd.numRow= c.numRow ORDER BY datComment FOR XML PATH(''), TYPE, ROOT).value('root[1]', 'nvarchar(max)'), 1, 2, '')) as FollowUpComments, "
+                + "(SELECT MAX(datComment) FROM core_tbl_events_details cd WHERE cd.numRow = c.numRow) as datUpdate, "
+                + "c.* FROM core_tbl_events c LEFT OUTER JOIN core_tbl_events_details cd ON cd.numRow = c.numRow) as t";
 
             if (sWhere.Length > 0)
             {
-                sSQL += " AND " + sWhere;
+                sSQL += " WHERE (1=1) AND " + sWhere;
             }
 
             if (sOrderBy.Length > 0)
@@ -609,7 +585,7 @@ namespace TestPOSTWebService
                 sSQL += " " + sOrderBy;
             }
 
-            return sSQL +";";
+            return sSQL + ";";
         }
 
         protected string sSQLSelectAccount()
@@ -618,7 +594,7 @@ namespace TestPOSTWebService
 
             if (!txtSearch.Text.Equals(""))
             {
-                sSQL += "SELECT * FROM core_tbl_games WHERE _id='" + txtSearch.Text + "';";
+                sSQL += "SELECT * FROM [dbo].[core_tbl_events] c WHERE c.[_id]='" + txtSearch.Text + "';";
             }
 
             return sSQL;
@@ -630,7 +606,7 @@ namespace TestPOSTWebService
 
             if (!txtSearch.Text.Equals(""))
             {
-                sSQL += "SELECT dd.* FROM core_tbl_games d INNER JOIN core_tbl_games_details dd ON d.numRow = dd.numRow WHERE d._id = '" + txtSearch.Text + "';";
+                sSQL += "Select cd.* FROM core_tbl_events c INNER JOIN core_tbl_events_details cd ON cd.numRow = c.numRow WHERE c.[\\CRITICAL-FIELD//]='" + txtSearch.Text + "';";
             }
 
             return sSQL;
@@ -646,24 +622,25 @@ namespace TestPOSTWebService
         protected void btnAppendFollowUp_Click(object sender, EventArgs e)
         {
             /*
+            String sTest = txtDatFollowUp.Text;
             if (!txtNumRow.Text.Equals(""))
             {
                 string[] formats = { "M/d/yyyy", "M/dd/yyyy", "MM/d/yyyy", "MM/dd/yyyy" };
-
                 DateTime dateValue;
                 if (DateTime.TryParseExact(txtDatFollowUp.Text, formats, new CultureInfo("en-US"), DateTimeStyles.None, out dateValue)
                     || txtDatFollowUp.Text.Equals(""))
                 {
                     String InsertQuery = string.Format(
-                       "INSERT INTO ClaimsDetails (numRow,vcFuCommentBy,vcFuComment,vcContactName,vcContactPhone,vcContactEmail,vcCallRefNo,datFollowUp) values ("
-                           + "{0},{1},{2},{3},{4},{5},{6},{7})",
-                            txtNumRow.Text.Equals("") ? "NULL" : txtNumRow.Text,
-                            txtVcFuCommentBy.Text.Equals("") ? "NULL" : "'" + txtVcFuCommentBy.Text + "'",
-                            txtVcFuComment.Text.Equals("") ? "NULL" : "'" + txtVcFuComment.Text + "'",
-                            txtVcContactName.Text.Equals("") ? "NULL" : "'" + txtVcContactName.Text + "'",
-                            txtVcContactPhone.Text.Equals("") ? "NULL" : "'" + txtVcContactPhone.Text + "'",
-                            txtVcContactEmail.Text.Equals("") ? "NULL" : "'" + txtVcContactEmail.Text + "'",
-                            txtVcCallRefNo.Text.Equals("") ? "NULL" : "'" + txtVcCallRefNo.Text + "'",
+                       "INSERT INTO ClientsDetails (numRowClients,datComment,vcCommentBy,vcInsStatus,vcWhatsNeeded,vcMltcPlan,datFollowUp) VALUES ("
+                           + "{0},{1},{2},{3},{4},{5},{6});"
+                           + "UPDATE Clients SET vcMltc={5} WHERE numRow='"
+                           + (txtNumRow.Text.Equals("") ? "NULL" : txtNumRow.Text) + "'",
+                        txtNumRow.Text.Equals("") ? "NULL" : txtNumRow.Text,
+                            "'" + DateTime.Now.ToString("MM/dd/yyyy") + "'",
+                            "'User'",
+                            "'" + listboxInsStatus_Clients.SelectedItem + "'",
+                            txtVcWhatsNeeded.Text.Equals("") ? "NULL" : "'" + txtVcWhatsNeeded.Text + "'",
+                            txtVcMltc.Text.Equals("") ? "NULL" : "'" + txtVcMltc.Text + "'",
                             txtDatFollowUp.Text.Equals("") ? "NULL" : "'" + dateValue.ToString().Split()[0] + "'"
                             );
 
@@ -672,16 +649,16 @@ namespace TestPOSTWebService
                     GridView1.DataSource = ds.Tables[0];
                     GridView1.DataBind();
 
+                    GridView2.DataSource = ds.Tables[2];
+                    GridView2.DataBind();
+
                     DataList4.DataSource = ds.Tables[3];
                     DataList4.DataBind();
 
-                    txtVcCallRefNo.Text = "";
-                    txtVcContactName.Text = "";
-                    txtVcContactPhone.Text = "";
-                    txtVcContactEmail.Text = "";
-                    txtVcFuCommentBy.Text = "";
+                    listboxInsStatus_Clients.ClearSelection();
+                    txtVcWhatsNeeded.Text = "";
+                    txtVcMltc.Text = "";
                     txtDatFollowUp.Text = "";
-                    txtVcFuComment.Text = "";
                 }
             }
             */
@@ -778,7 +755,12 @@ namespace TestPOSTWebService
                 DataList4.DataSource = ds.Tables[3];
                 DataList4.DataBind();
 
-                txtNumRow.Text = ds.Tables[2].Rows[0]["numRow"].ToString();
+                DataTable dtRecord = ds.Tables[2];
+                txtNumRow.Text = dtRecord.Rows[0]["numRow"].ToString();
+                listboxInsStatus_Clients.Text = dtRecord.Rows[0]["vcInsStatus"].ToString();
+
+                //compile-error?
+                //txtVcMltc.Text = dtRecord.Rows[0]["vcMltc"].ToString();
             }
         }
 
@@ -798,7 +780,21 @@ namespace TestPOSTWebService
             DataList4.DataBind();
         }
 
-        protected void btnPreview_Click(object sender, EventArgs e)
+        protected void btnDemo_Click(object sender, EventArgs e)
+        {
+            Response.ContentType = "text/plain";
+            Response.AddHeader("content-disposition", "attachment; filename=last first.txt");
+            Response.Clear();
+            using (StreamWriter writer = new StreamWriter(Response.OutputStream, Encoding.UTF8))
+            {
+                writer.WriteLine("Line 1");
+                writer.WriteLine("Line 2");
+            }
+
+            Response.End();
+        }
+
+            protected void btnPreview_Click(object sender, EventArgs e)
         {
             if (sender is LinkButton)
                 txtSearch.Text = ((LinkButton)sender).Text;
@@ -853,7 +849,7 @@ namespace TestPOSTWebService
             var memoryStream = new MemoryStream();
             var pck = new ExcelPackage();
 
-            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["CommentsConnectionString"].ConnectionString))
+            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["OneBaseConnectionString"].ConnectionString))
             using (var cmd = new SqlCommand(sSQLSelectAllAccounts(), conn)) // show=true, not paged
             using (var adapter = new SqlDataAdapter(cmd))
             using (var dt = new DataTable())
@@ -873,27 +869,27 @@ namespace TestPOSTWebService
                 {
                     var wb = pck.Workbook;
                     var ws = wb.Worksheets.Add(info);
-                    for (var col = 1; col <= totalCols; col++)   //printing header  //col = 1 to 2 changed to avoid numRow
+                    for (var col = 2; col <= totalCols; col++)   //printing header  //col = 1 to 2 changed to avoid numRow
                     {
-                        ws.SetValue(1, col, dt.Columns[col - 1].ColumnName);  //col to col-1 changed to avoid numRow
-
-                        ws.Column(2).Style.Numberformat.Format = "mm/dd/yyyy";    //dob
-                        ws.Column(4).Style.Numberformat.Format = "mm/dd/yyyy";    //datcomment
-                        ws.Column(5).Style.Numberformat.Format = "hh:mm:ss am/pm";  //time comment
-                        // ws.Column(55).Style.Numberformat.Format = "@";  //worksheet
+                        ws.SetValue(1, col - 1, dt.Columns[col - 1].ColumnName);  //col to col-1 changed to avoid numRow
+                        ws.Column(3).Style.Numberformat.Format = "mm/dd/yyyy";    //datAdded
+                        ws.Column(17).Style.Numberformat.Format = "mm/dd/yyyy";    //datDOB
+                        ws.Column(21).Style.Numberformat.Format = "mm/dd/yyyy";    //datAuth
+                        ws.Column(22).Style.Numberformat.Format = "mm/dd/yyyy";    //datEffectiv
+                        ws.Column(23).Style.Numberformat.Format = "mm/dd/yyyy";    //datExp
                     }
 
                     for (var row = 0; row < rows.Count; row++) //printing rest of the rows
-                        for (var col = 0; col < totalCols; col++)  //col = 0 to 1 changed to avoid numRow
+                        for (var col = 1; col < totalCols; col++)  //col = 0 to 1 changed to avoid numRow
                         {
-                            if (col == 0) //for followup comments column
+                            if (col == 74) //for followup comnents column
                             {
-                                var str = rows[row][col].ToString().Replace("||", Environment.NewLine).Replace("|", Environment.NewLine + "   ");
-                                ws.SetValue(row + 2, col + 1, str);
+                                var str = rows[row][col].ToString().Replace("||", Environment.NewLine + Environment.NewLine).Replace("|", Environment.NewLine + "   ");
+                                ws.SetValue(row + 2, col, str);  //col+1 changed to col to avoid numrow
                             }
                             else
                             {
-                                ws.SetValue(row + 2, col + 1, rows[row][col]);
+                                ws.SetValue(row + 2, col, rows[row][col]);  ////col+1 changed to col to avoid numrow
                             }
                         }
                 });
@@ -939,7 +935,7 @@ namespace TestPOSTWebService
                     {
                         sSQLTail = sSQLTail.Replace("DELETE", "DELETE FROM Claims WHERE");
 
-                        using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["CommentsConnectionString"].ConnectionString))
+                        using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["OneBaseConnectionString"].ConnectionString))
                         {
                             using (var cmd = new SqlCommand(sSQLTail, conn))
                             {
@@ -1005,7 +1001,7 @@ namespace TestPOSTWebService
                     txtDecExpected.Text.Equals("(Optional)") ? "NULL" : "'" + txtDecExpected.Text + "'",
                     txtVcUpCategory.Text.Equals("(Optional)") ? "NULL" : "'" + txtVcUpCategory.Text + "'"
                );
-            string connectionstring = ConfigurationManager.ConnectionStrings["CommentsConnectionString"].ConnectionString;
+            string connectionstring = ConfigurationManager.ConnectionStrings["OneBaseConnectionString"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionstring))
             {
                 conn.Open();

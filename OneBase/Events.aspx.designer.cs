@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TestPOSTWebService {
+namespace OneBase {
     
     
-    public partial class WebForm2 {
+    public partial class Events {
         
         /// <summary>
         /// form1 control.
@@ -38,6 +38,24 @@ namespace TestPOSTWebService {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DataList DataList4;
+        
+        /// <summary>
+        /// listboxInsStatus_Clients control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox listboxInsStatus_Clients;
+        
+        /// <summary>
+        /// btnAppendFollowUp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAppendFollowUp;
         
         /// <summary>
         /// txtNumRow control.
@@ -83,6 +101,15 @@ namespace TestPOSTWebService {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnClear;
+        
+        /// <summary>
+        /// BtnDemo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnDemo;
         
         /// <summary>
         /// Hidden1 control.

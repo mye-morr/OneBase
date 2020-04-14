@@ -48,7 +48,7 @@ namespace OneBase
                     var dt = excel.ToDataTable("Clients");
                     //var dtf = excel.ToFollowUpDataTable();
 
-                    using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["CommentsConnectionString"].ConnectionString))
+                    using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["OneBaseConnectionString"].ConnectionString))
                     {
                         using (SqlCommand cmd = new SqlCommand("Upsert_Clients"))
                         {
@@ -462,7 +462,7 @@ namespace OneBase
          ****************************/
         private DataSet GridDataTable(string Query = "", int pageIndex1 = 0, int pageSize1 = 0)
         {
-            string connectionstring = ConfigurationManager.ConnectionStrings["CommentsConnectionString"].ConnectionString;
+            string connectionstring = ConfigurationManager.ConnectionStrings["OneBaseConnectionString"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionstring))
             {
                 conn.Open();
@@ -621,6 +621,7 @@ namespace OneBase
          ****************************/
         protected void btnAppendFollowUp_Click(object sender, EventArgs e)
         {
+            /*
             String sTest = txtDatFollowUp.Text;
             if (!txtNumRow.Text.Equals(""))
             {
@@ -660,6 +661,7 @@ namespace OneBase
                     txtDatFollowUp.Text = "";
                 }
             }
+            */
         }
 
         // does math to link pages excluding current page
@@ -756,7 +758,9 @@ namespace OneBase
                 DataTable dtRecord = ds.Tables[2];
                 txtNumRow.Text = dtRecord.Rows[0]["numRow"].ToString();
                 listboxInsStatus_Clients.Text = dtRecord.Rows[0]["vcInsStatus"].ToString();
-                txtVcMltc.Text = dtRecord.Rows[0]["vcMltc"].ToString();
+
+                //compile-error?
+                //txtVcMltc.Text = dtRecord.Rows[0]["vcMltc"].ToString();
             }
         }
 
@@ -776,7 +780,21 @@ namespace OneBase
             DataList4.DataBind();
         }
 
-        protected void btnPreview_Click(object sender, EventArgs e)
+        protected void btnDemo_Click(object sender, EventArgs e)
+        {
+            Response.ContentType = "text/plain";
+            Response.AddHeader("content-disposition", "attachment; filename=last first.txt");
+            Response.Clear();
+            using (StreamWriter writer = new StreamWriter(Response.OutputStream, Encoding.UTF8))
+            {
+                writer.WriteLine("Line 1");
+                writer.WriteLine("Line 2");
+            }
+
+            Response.End();
+        }
+
+            protected void btnPreview_Click(object sender, EventArgs e)
         {
             if (sender is LinkButton)
                 txtSearch.Text = ((LinkButton)sender).Text;
@@ -831,7 +849,7 @@ namespace OneBase
             var memoryStream = new MemoryStream();
             var pck = new ExcelPackage();
 
-            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["CommentsConnectionString"].ConnectionString))
+            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["OneBaseConnectionString"].ConnectionString))
             using (var cmd = new SqlCommand(sSQLSelectAllAccounts(), conn)) // show=true, not paged
             using (var adapter = new SqlDataAdapter(cmd))
             using (var dt = new DataTable())
@@ -917,7 +935,7 @@ namespace OneBase
                     {
                         sSQLTail = sSQLTail.Replace("DELETE", "DELETE FROM Claims WHERE");
 
-                        using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["CommentsConnectionString"].ConnectionString))
+                        using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["OneBaseConnectionString"].ConnectionString))
                         {
                             using (var cmd = new SqlCommand(sSQLTail, conn))
                             {
@@ -983,7 +1001,7 @@ namespace OneBase
                     txtDecExpected.Text.Equals("(Optional)") ? "NULL" : "'" + txtDecExpected.Text + "'",
                     txtVcUpCategory.Text.Equals("(Optional)") ? "NULL" : "'" + txtVcUpCategory.Text + "'"
                );
-            string connectionstring = ConfigurationManager.ConnectionStrings["CommentsConnectionString"].ConnectionString;
+            string connectionstring = ConfigurationManager.ConnectionStrings["OneBaseConnectionString"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connectionstring))
             {
                 conn.Open();

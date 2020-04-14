@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA+n5ZfsCWKkqQaYas/K02wgAAAAACAAAAAAAQZgAAAAEAACAAAADiCuCD/dj8umCTvCTn6Z153OIxdpHOD0Jo0NZhBQCeowAAAAAOgAAAAAIAACAAAAC+VTpTYNwJuxdASlWKGvMOyAJ/nDiW7IZVv0Tatz/r5iAAAAAk1h32DwUJVJWySccv2i3x45+NNTGgnHysULmKGRTmFEAAAACwMAqD35T0Oi0+SmMt3WDDZSGrU4hZ+rZ/O7VFq8zu2jXeqHzC/o9Tj9yjHB/dljXLMmdwoIB6xUj3852avkiC</EncryptedPassword>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA6M7BV3TLdUSYLFwyhvHFJQAAAAACAAAAAAAQZgAAAAEAACAAAABVXOuZgWejHWtL2qY8ZN+beKSlLCnbglHc5GLS64uUtAAAAAAOgAAAAAIAACAAAAAkQheAg0kXxu6yBkPxbqRNbipkAB0cQ8CNOfBIsFeVTiAAAABuSRxxIBt82sHlTmkJAqL8mNr3Yrzi5FYXYYkIDJ9lu0AAAAB0Gg5Q4fNiY7zNLNcrFyZ0Pq4QwGJ0r1WCQSYtnd3M4UurFCsKk6NEFrL74a+H8xYoNRsFn+ghuqL4Sjp035+l</EncryptedPassword>
     <_PublishTargetUrl>ftp://50.62.168.157/httpdocs/OneBase</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
@@ -17,10 +17,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/25/2017 14:18:01</publishTime>
     </File>
     <File Include="bin/OneBase.dll">
-      <publishTime>06/20/2019 17:59:07</publishTime>
+      <publishTime>04/14/2020 06:05:07</publishTime>
     </File>
     <File Include="bin/OneBase.pdb">
-      <publishTime>06/20/2019 17:59:07</publishTime>
+      <publishTime>04/14/2020 06:05:07</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>07/25/2017 14:18:00</publishTime>
@@ -59,7 +59,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/25/2017 14:18:01</publishTime>
     </File>
     <File Include="Clients.aspx">
-      <publishTime>06/20/2019 17:52:41</publishTime>
+      <publishTime>09/17/2019 00:56:35</publishTime>
     </File>
     <File Include="Clients.aspx.cs">
       <publishTime>06/14/2019 09:08:07</publishTime>
@@ -68,10 +68,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/14/2019 06:52:02</publishTime>
     </File>
     <File Include="ColdToWarm.aspx">
-      <publishTime>06/20/2019 17:52:41</publishTime>
+      <publishTime>06/27/2019 12:37:43</publishTime>
     </File>
     <File Include="Default.aspx">
       <publishTime>06/14/2019 13:33:12</publishTime>
+    </File>
+    <File Include="Events.aspx">
+      <publishTime>04/06/2020 13:17:35</publishTime>
     </File>
     <File Include="Games.aspx">
       <publishTime>06/14/2019 06:43:14</publishTime>
@@ -85,11 +88,38 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="gridviewScroll.min.js">
       <publishTime>06/13/2019 23:07:22</publishTime>
     </File>
+    <File Include="Img/arrowhl.png">
+      <publishTime>06/13/2019 23:07:22</publishTime>
+    </File>
+    <File Include="Img/arrowhr.png">
+      <publishTime>06/13/2019 23:07:22</publishTime>
+    </File>
+    <File Include="Img/arrowvb.png">
+      <publishTime>06/13/2019 23:07:22</publishTime>
+    </File>
+    <File Include="Img/arrowvt.png">
+      <publishTime>06/13/2019 23:07:22</publishTime>
+    </File>
+    <File Include="Img/help_icon.jpg">
+      <publishTime>06/13/2019 23:07:22</publishTime>
+    </File>
+    <File Include="Img/Thumbs.db">
+      <publishTime>06/13/2019 23:07:22</publishTime>
+    </File>
+    <File Include="Nonsched.aspx">
+      <publishTime>04/06/2020 11:44:04</publishTime>
+    </File>
+    <File Include="OneBase.dbml">
+      <publishTime>04/14/2020 06:01:21</publishTime>
+    </File>
     <File Include="packages.config">
       <publishTime>08/30/2017 14:16:35</publishTime>
     </File>
+    <File Include="typeahead.jquery.min.js">
+      <publishTime>04/14/2020 06:01:13</publishTime>
+    </File>
     <File Include="Web.config">
-      <publishTime>06/20/2019 14:02:50</publishTime>
+      <publishTime>04/14/2020 05:45:42</publishTime>
     </File>
   </ItemGroup>
 </Project>
